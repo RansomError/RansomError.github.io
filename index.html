@@ -8,7 +8,7 @@
 <meta name="keywords" content="Handy Labs, Glasswave, Liquid Glass music player, Roblox horror games, V8V Studio, software projects, web apps">
 <title>Handy Labs — Projects, Apps & Glasswave</title>
 <meta name="description" id="hlMetaDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
-<link rel="canonical" id="hlCanonical" href="https://handylab.ru/">
+
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta property="og:type" content="website">
@@ -16,12 +16,14 @@
 <meta property="og:title" id="hlOgTitle" content="Handy Labs — Projects, Apps & Glasswave">
 <meta property="og:description" id="hlOgDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
 <meta property="og:url" id="hlOgUrl" content="https://handylab.ru/">
-<meta property="og:image" content="https://handylab.ru/favicon.png">
-<meta property="og:image:alt" content="Handy Labs emerald glass icon">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://handylab.ru/social-preview.jpg">
+<meta property="og:image:width" content="480">
+<meta property="og:image:height" content="252">
+<meta property="og:image:alt" content="Handy Labs emerald liquid-glass icon and project showcase">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="hlTwitterTitle" content="Handy Labs — Projects, Apps & Glasswave">
 <meta name="twitter:description" id="hlTwitterDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
-<meta name="twitter:image" content="https://handylab.ru/favicon.png">
+<meta name="twitter:image" content="https://handylab.ru/social-preview.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -810,7 +812,9 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     document.getElementById('hlTwitterDescription').content=page.description;
     const canonical=new URL('https://handylab.ru/');
     if(state.project!=='overview')canonical.searchParams.set('project',state.project);
-    document.getElementById('hlCanonical').href=canonical.href;
+    let canonicalTag=document.getElementById('hlCanonical');
+    if(!canonicalTag){canonicalTag=document.createElement('link');canonicalTag.id='hlCanonical';canonicalTag.rel='canonical';document.head.appendChild(canonicalTag);}
+    canonicalTag.href=canonical.href;
     document.getElementById('hlOgUrl').content=canonical.href;
   }
   function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
