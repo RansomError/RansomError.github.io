@@ -8,8 +8,8 @@
 <meta name="keywords" content="Handy Labs, Glasswave, Liquid Glass music player, Roblox horror games, V8V Studio, software projects, web apps">
 <title>Handy Labs — Projects, Apps & Glasswave</title>
 <meta name="description" id="hlMetaDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
-<link rel="canonical" id="hlCanonical" href="https://handylab.ru/">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handy Labs">
@@ -34,8 +34,8 @@
       "logo": {
         "@type": "ImageObject",
         "url": "https://handylab.ru/favicon.png",
-        "width": 96,
-        "height": 96
+        "width": 128,
+        "height": 128
       }
     },
     {
@@ -810,7 +810,9 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     document.getElementById('hlTwitterDescription').content=page.description;
     const canonical=new URL('https://handylab.ru/');
     if(state.project!=='overview')canonical.searchParams.set('project',state.project);
-    document.getElementById('hlCanonical').href=canonical.href;
+    let canonicalTag=document.getElementById('hlCanonical');
+    if(!canonicalTag){canonicalTag=document.createElement('link');canonicalTag.id='hlCanonical';canonicalTag.rel='canonical';document.head.appendChild(canonicalTag);}
+    canonicalTag.href=canonical.href;
     document.getElementById('hlOgUrl').content=canonical.href;
   }
   function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
@@ -840,7 +842,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   renderProject();applyLanguage();document.documentElement.dataset.handyLiquidGlass='loading';
   const cdn='https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
   const setConfig=(el,config)=>{el.dataset.config=JSON.stringify(config);};
-  (async()=>{try{const mod=await import(cdn);const LiquidGlass=mod.LiquidGlass;const shared={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};setConfig(indicator,{cornerRadius:16,zRadius:16,blurAmount:0,edgeHighlight:.2,shadowOpacity:.25});setConfig(panel,shared);await Promise.all([LiquidGlass.init({root:navRoot,glassElements:[indicator],defaults:shared}),LiquidGlass.init({root:panelRoot,glassElements:[panel],defaults:shared})]);document.documentElement.dataset.handyLiquidGlass='ready';}catch(err){document.documentElement.dataset.handyLiquidGlass='fallback';notice(text('glassFallback'));console.warn('LiquidGlass CDN unavailable; using CSS glass fallback.',err);}})();
+  (async()=>{try{const mod=await import(cdn);const LiquidGlass=mod.LiquidGlass;const shared={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};setConfig(indicator,{blurAmount:0,refraction:.69,chromAberration:.05,edgeHighlight:.2,specular:0,fresnel:1,distortion:0,cornerRadius:15,zRadius:15,opacity:1,saturation:0,tintStrength:0,brightness:0,shadowOpacity:.25,shadowSpread:10,shadowOffsetY:1});setConfig(panel,shared);await Promise.all([LiquidGlass.init({root:navRoot,glassElements:[indicator],defaults:shared}),LiquidGlass.init({root:panelRoot,glassElements:[panel],defaults:shared})]);document.documentElement.dataset.handyLiquidGlass='ready';}catch(err){document.documentElement.dataset.handyLiquidGlass='fallback';notice(text('glassFallback'));console.warn('LiquidGlass CDN unavailable; using CSS glass fallback.',err);}})();
   window.addEventListener('beforeunload',()=>state.tracks.forEach(track=>URL.revokeObjectURL(track.url)));
 })();
 </script>
