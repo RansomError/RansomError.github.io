@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://handylab.ru/</loc>
-  </url>
+  <url><loc>https://handylab.ru/</loc></url>
+  <url><loc>https://handylab.ru/?project=glasswave</loc></url>
+  <url><loc>https://handylab.ru/?project=v8v</loc></url>
+  <url><loc>https://handylab.ru/?project=releases</loc></url>
 </urlset>
