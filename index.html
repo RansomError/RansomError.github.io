@@ -9,19 +9,19 @@
 <title>Handy Labs — Projects, Apps & Glasswave</title>
 <meta name="description" id="hlMetaDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
 
-<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" href="/favicon.png?v=3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handy Labs">
 <meta property="og:title" id="hlOgTitle" content="Handy Labs — Projects, Apps & Glasswave">
 <meta property="og:description" id="hlOgDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
 <meta property="og:url" id="hlOgUrl" content="https://handylab.ru/">
-<meta property="og:image" content="https://handylab.ru/favicon.png">
+<meta property="og:image" content="https://handylab.ru/favicon.png?v=3">
 <meta property="og:image:alt" content="Handy Labs emerald glass icon">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" id="hlTwitterTitle" content="Handy Labs — Projects, Apps & Glasswave">
 <meta name="twitter:description" id="hlTwitterDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
-<meta name="twitter:image" content="https://handylab.ru/favicon.png">
+<meta name="twitter:image" content="https://handylab.ru/favicon.png?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +33,7 @@
       "url": "https://handylab.ru/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://handylab.ru/favicon.png",
+        "url": "https://handylab.ru/favicon.png?v=3",
         "width": 128,
         "height": 128
       }
@@ -586,7 +586,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
  #hlNavRoot{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:5px;border:1px solid var(--hl-line);border-radius:20px;overflow:hidden;background:rgba(119,165,174,.065);box-shadow:0 13px 42px rgba(0,0,0,.09),inset 0 1px 0 var(--hl-edge)}
 .hl-nav-backdrop{position:absolute;z-index:-2;inset:0;pointer-events:none;background:linear-gradient(105deg,rgba(91,236,208,.09),transparent 36%,rgba(139,161,255,.12) 76%,transparent)}
 .hl-nav-indicator{position:absolute;z-index:5;left:5px;top:5px;bottom:5px;width:calc((100% - 10px - 16px)/4);border:1px solid rgba(255,255,255,.36);border-radius:15px;pointer-events:none;transform:translateX(calc(var(--hl-slide,0) * (100% + 4px)));transition:transform .64s cubic-bezier(.16,.84,.2,1);background:linear-gradient(112deg,rgba(177,255,239,.18),rgba(255,255,255,.075) 52%,rgba(176,192,255,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.62),0 8px 24px rgba(0,0,0,.08)}
-.hl-tab{min-width:0;min-height:42px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;background:transparent;color:var(--hl-muted);font-size:12px!important;font-weight:760!important;white-space:nowrap;transition:color .24s,transform .24s}
+.hl-tab{position:relative;z-index:6;min-width:0;min-height:42px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;background:transparent;color:var(--hl-muted);font-size:12px!important;font-weight:760!important;white-space:nowrap;transition:color .24s,transform .24s}
 .hl-tab svg{width:16px;height:16px;flex:none;opacity:.84}.hl-tab:hover{color:var(--hl-fg);transform:translateY(-1px)}.hl-tab[aria-pressed="true"]{color:var(--hl-fg)}
 #hlNewMain{width:min(1320px,calc(100% - 44px));flex:1;min-height:0;margin:0 auto 17px;position:relative}
 #hlPanelRoot{height:100%;min-height:0;position:relative;isolation:isolate;display:grid}
@@ -698,7 +698,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   <div class="hl-ambient" aria-hidden="true"></div>
   <header class="hl-topbar">
     <a class="hl-brand" href="#" id="hlNewHome" aria-label="Handy Labs home">
-      <span class="hl-brand-icon"><img src="/favicon.png" alt="" width="39" height="39" decoding="async"></span>
+      <span class="hl-brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h3l2-6 4 12 3-9 2 3h4"/></svg></span>
       <span class="hl-brand-copy"><span class="hl-brand-name">Handy Labs</span><span class="hl-brand-sub" id="hlNewBrandSub">PROJECTS · APPS · EXPERIMENTS</span></span>
     </a>
     <div class="hl-actions">
@@ -815,7 +815,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     canonicalTag.href=canonical.href;
     document.getElementById('hlOgUrl').content=canonical.href;
   }
-  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
+  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();scheduleLiquidGlassRefresh();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
   function selectProject(id){if(!['overview','glasswave','v8v','releases'].includes(id))return;state.project=id;const url=new URL(window.location.href);if(id==='overview')url.searchParams.delete('project');else url.searchParams.set('project',id);window.history.replaceState(null,'',url);renderProject();}
   panel.addEventListener('click',async event=>{const trigger=event.target.closest('[data-copy-email]');if(!trigger)return;event.preventDefault();const address=trigger.dataset.copyEmail;let copied=false;try{await navigator.clipboard.writeText(address);copied=true;}catch(e){const field=document.createElement('textarea');field.value=address;field.readOnly=true;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();try{copied=document.execCommand('copy');}catch(error){}field.remove();}if(copied){playUISound('copy');notice((state.lang==='ru'?'Скопировано: ':'Copied: ')+address,true);}else notice(state.lang==='ru'?'Не удалось скопировать адрес.':'Could not copy the address.',false);});
   function formatTime(v){if(!Number.isFinite(v)||v<0)return '0:00';return Math.floor(v/60)+':'+String(Math.floor(v%60)).padStart(2,'0');}
@@ -836,13 +836,48 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   langButton.addEventListener('click',()=>{state.lang=state.lang==='ru'?'en':'ru';applyLanguage();});
   try{state.theme=localStorage.getItem('handylabs-theme')||'auto';}catch(e){}if(!['auto','light','dark'].includes(state.theme))state.theme='auto';root.dataset.theme=state.theme;renderThemeMenu();
   themeToggle.addEventListener('click',()=>{if(themeToggle.getAttribute('aria-expanded')==='true')closeThemeMenu();else openThemeMenu();});
-  themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.hlTheme;root.dataset.theme=state.theme;try{localStorage.setItem('handylabs-theme',state.theme);}catch(e){}renderThemeMenu();closeThemeMenu();playUISound('select');}));
+  themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.hlTheme;root.dataset.theme=state.theme;try{localStorage.setItem('handylabs-theme',state.theme);}catch(e){}renderThemeMenu();closeThemeMenu();scheduleLiquidGlassRefresh();playUISound('select');}));
   document.addEventListener('click',event=>{if(!event.target.closest('.hl-theme-wrap'))closeThemeMenu();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape')closeThemeMenu();});
-  renderProject();applyLanguage();document.documentElement.dataset.handyLiquidGlass='loading';
+  applyLanguage();document.documentElement.dataset.handyLiquidGlass='loading';
   const cdn='https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
   const setConfig=(el,config)=>{el.dataset.config=JSON.stringify(config);};
-  (async()=>{try{const mod=await import(cdn);const LiquidGlass=mod.LiquidGlass;const shared={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};setConfig(indicator,{blurAmount:0,refraction:.69,chromAberration:.05,edgeHighlight:.2,specular:0,fresnel:1,distortion:0,cornerRadius:15,zRadius:15,opacity:1,saturation:0,tintStrength:0,brightness:0,shadowOpacity:.25,shadowSpread:10,shadowOffsetY:1});setConfig(panel,shared);await Promise.all([LiquidGlass.init({root:navRoot,glassElements:[indicator],defaults:shared}),LiquidGlass.init({root:panelRoot,glassElements:[panel],defaults:shared})]);document.documentElement.dataset.handyLiquidGlass='ready';}catch(err){document.documentElement.dataset.handyLiquidGlass='fallback';notice(text('glassFallback'));console.warn('LiquidGlass CDN unavailable; using CSS glass fallback.',err);}})();
+  const sharedGlassConfig={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};
+  let LiquidGlassModule=null;
+  let navGlassInstance=null;
+  let panelGlassInstance=null;
+  let glassRefreshTimer=0;
+  let glassInitVersion=0;
+  async function rebuildLiquidGlass(){
+    if(!LiquidGlassModule)return;
+    const version=++glassInitVersion;
+    try{navGlassInstance?.destroy();}catch(e){}
+    try{panelGlassInstance?.destroy();}catch(e){}
+    navGlassInstance=null;panelGlassInstance=null;
+    setConfig(indicator,{blurAmount:0,refraction:.69,chromAberration:.05,edgeHighlight:.2,specular:0,fresnel:1,distortion:0,cornerRadius:16,zRadius:16,opacity:1,saturation:0,tintStrength:0,brightness:0,shadowOpacity:.25,shadowSpread:10,shadowOffsetY:1});
+    setConfig(panel,sharedGlassConfig);
+    try{
+      if(document.fonts?.ready)await document.fonts.ready;
+      const [nextNav,nextPanel]=await Promise.all([
+        LiquidGlassModule.init({root:navRoot,glassElements:[indicator],defaults:sharedGlassConfig}),
+        LiquidGlassModule.init({root:panelRoot,glassElements:[panel],defaults:sharedGlassConfig})
+      ]);
+      if(version!==glassInitVersion){nextNav.destroy();nextPanel.destroy();return;}
+      navGlassInstance=nextNav;panelGlassInstance=nextPanel;
+      document.documentElement.dataset.handyLiquidGlass='ready';
+    }catch(err){
+      if(version===glassInitVersion){
+        document.documentElement.dataset.handyLiquidGlass='fallback';
+        console.warn('LiquidGlass initialization failed; using CSS fallback.',err);
+      }
+    }
+  }
+  function scheduleLiquidGlassRefresh(){
+    if(!LiquidGlassModule)return;
+    window.clearTimeout(glassRefreshTimer);
+    glassRefreshTimer=window.setTimeout(()=>{void rebuildLiquidGlass();},120);
+  }
+  (async()=>{try{const mod=await import(cdn);LiquidGlassModule=mod.LiquidGlass;await rebuildLiquidGlass();}catch(err){document.documentElement.dataset.handyLiquidGlass='fallback';notice(text('glassFallback'));console.warn('LiquidGlass CDN unavailable; using CSS glass fallback.',err);}})();
   window.addEventListener('beforeunload',()=>state.tracks.forEach(track=>URL.revokeObjectURL(track.url)));
 })();
 </script>
