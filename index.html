@@ -9,8 +9,10 @@
 <title>Handy Labs — Projects, Apps & Glasswave</title>
 <meta name="description" id="hlMetaDescription" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
 
-<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" href="/favicon.png?v=3">
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=4">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1">
+<link rel="shortcut icon" href="/favicon.svg?v=1">
+<link rel="apple-touch-icon" href="/favicon.png?v=4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handy Labs">
 <meta property="og:title" id="hlOgTitle" content="Handy Labs — Projects, Apps & Glasswave">
@@ -583,10 +585,12 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
 .hl-select,.hl-small-button{height:39px;padding:0 12px;border:1px solid var(--hl-line);border-radius:13px;background:var(--hl-panel);box-shadow:inset 0 1px 0 var(--hl-edge);font-size:11px!important;font-weight:750!important;color:var(--hl-fg)}
 .hl-select{max-width:124px}
 .hl-project-nav-wrap{width:min(1320px,calc(100% - 44px));flex:none;margin:0 auto 15px}
- #hlNavRoot{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:5px;border:1px solid var(--hl-line);border-radius:20px;overflow:hidden;background:rgba(119,165,174,.065);box-shadow:0 13px 42px rgba(0,0,0,.09),inset 0 1px 0 var(--hl-edge)}
-.hl-nav-backdrop{position:absolute;z-index:-2;inset:0;pointer-events:none;background:linear-gradient(105deg,rgba(91,236,208,.09),transparent 36%,rgba(139,161,255,.12) 76%,transparent)}
-.hl-nav-indicator{position:absolute;z-index:5;left:5px;top:5px;bottom:5px;width:calc((100% - 10px - 16px)/4);border:1px solid rgba(255,255,255,.36);border-radius:15px;pointer-events:none;transform:translateX(calc(var(--hl-slide,0) * (100% + 4px)));transition:transform .64s cubic-bezier(.16,.84,.2,1);background:linear-gradient(112deg,rgba(177,255,239,.18),rgba(255,255,255,.075) 52%,rgba(176,192,255,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.62),0 8px 24px rgba(0,0,0,.08)}
-.hl-tab{position:relative;z-index:6;min-width:0;min-height:42px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;background:transparent;color:var(--hl-muted);font-size:12px!important;font-weight:760!important;white-space:nowrap;transition:color .24s,transform .24s}
+#hlNavShell{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr);padding:5px;border:1px solid var(--hl-line);border-radius:20px;overflow:visible;background:rgba(119,165,174,.065);box-shadow:0 13px 42px rgba(0,0,0,.09),inset 0 1px 0 var(--hl-edge)}
+#hlNavRoot{position:absolute;z-index:1;inset:0;pointer-events:none;isolation:isolate;border-radius:inherit}
+.hl-nav-backdrop{position:absolute;z-index:0;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(105deg,rgba(91,236,208,.12),rgba(255,255,255,.035) 42%,rgba(139,161,255,.13) 78%),linear-gradient(140deg,rgba(26,48,57,.26),rgba(37,51,73,.18))}
+.hl-nav-indicator{position:absolute;z-index:1;left:5px;top:5px;bottom:5px;width:calc((100% - 10px - 12px)/4);border:1px solid rgba(255,255,255,.36);border-radius:15px;pointer-events:none;transform:translateX(calc(var(--hl-slide,0) * (100% + 4px)));transition:transform .42s cubic-bezier(.2,.75,.25,1);background:linear-gradient(112deg,rgba(177,255,239,.12),rgba(255,255,255,.035) 52%,rgba(176,192,255,.12));box-shadow:inset 0 1px 0 rgba(255,255,255,.48),0 5px 16px rgba(0,0,0,.06)}
+#hlNavButtons{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;min-width:0}
+.hl-tab{position:relative;z-index:1;min-width:0;min-height:42px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;background:transparent;color:var(--hl-muted);font-size:12px!important;font-weight:760!important;white-space:nowrap;transition:color .24s,transform .24s}
 .hl-tab svg{width:16px;height:16px;flex:none;opacity:.84}.hl-tab:hover{color:var(--hl-fg);transform:translateY(-1px)}.hl-tab[aria-pressed="true"]{color:var(--hl-fg)}
 #hlNewMain{width:min(1320px,calc(100% - 44px));flex:1;min-height:0;margin:0 auto 17px;position:relative}
 #hlPanelRoot{height:100%;min-height:0;position:relative;isolation:isolate;display:grid}
@@ -669,7 +673,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
 .hl-domain-link{color:var(--hl-muted);font-size:10px;letter-spacing:.12em;border-bottom:1px solid var(--hl-line);padding-bottom:4px;white-space:nowrap}.hl-domain-link:hover{color:var(--hl-fg);border-color:var(--hl-accent2)}
 @media(prefers-reduced-motion:reduce){#hlNewSite *,#hlNewSite *::before,#hlNewSite *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(max-width:860px){.hl-grid{grid-template-columns:1fr .82fr;gap:18px}.hl-feature{min-height:280px;padding:20px}.hl-glasswave-grid{grid-template-columns:.85fr 1.15fr}.hl-content{padding:24px}.hl-screen-head{align-items:flex-start;flex-direction:column;gap:12px}.hl-screen-head .hl-copy{max-width:650px}}
-@media(max-width:680px){#hlNewSite{min-height:500px}.hl-topbar{width:calc(100% - 24px);height:63px;gap:8px}.hl-brand-icon{width:34px;height:34px;border-radius:11px}.hl-brand-name{font-size:16px}.hl-brand-sub{font-size:7px;letter-spacing:.11em}.hl-actions{gap:5px}.hl-select,.hl-small-button{height:35px;padding:0 8px;font-size:10px!important}.hl-select{max-width:92px}.hl-project-nav-wrap{width:calc(100% - 16px);margin-bottom:9px}.hl-project-nav-wrap{overflow:visible}#hlNavRoot{grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;padding:4px;border-radius:16px}.hl-nav-indicator{left:4px;top:4px;bottom:4px;width:calc((100% - 8px - 4px)/5);border-radius:12px;transform:translateX(calc(var(--hl-slide,0) * (100% + 1px)))}.hl-tab{min-height:42px;display:flex;flex-direction:column;gap:4px;padding:4px 1px;font-size:8px!important;letter-spacing:-.02em}.hl-tab svg{width:14px;height:14px}#hlNewMain{width:calc(100% - 16px);margin-bottom:8px}#hlPanelRoot{height:100%}.hl-panel{border-radius:24px}.hl-panel-backdrop{border-radius:24px}.hl-content{padding:20px 17px}.hl-grid{grid-template-columns:1fr;gap:18px}.hl-title{font-size:clamp(36px,11vw,54px);margin:16px 0}.hl-copy{font-size:12px;line-height:1.7}.hl-cta-row{margin-top:19px}.hl-cta{min-height:41px;padding:0 12px;font-size:10px!important}.hl-meta-line{margin-top:19px;gap:11px;flex-wrap:wrap;font-size:9px}.hl-feature{min-height:155px;padding:15px;border-radius:17px;gap:10px}.hl-feature-word{font-size:52px;margin:13px 0}.hl-feature-bars{height:28px}.hl-feature-top,.hl-feature-bottom{font-size:8px}.hl-screen-head{margin-bottom:15px;gap:6px}.hl-screen-head .hl-title{font-size:33px;margin:10px 0 0}.hl-screen-head .hl-copy{font-size:10px;line-height:1.6}.hl-glasswave-grid{grid-template-columns:1fr;gap:9px}.hl-about{padding:15px;border-radius:17px}.hl-about-title{font-size:21px;margin:11px 0 7px}.hl-about-copy{font-size:10px;line-height:1.6}.hl-contact-link{margin-top:10px;font-size:9px;padding:8px 9px}.hl-player{padding:11px;border-radius:17px;gap:9px}.hl-player-head{font-size:10px}.hl-file-box{padding:10px;border-radius:13px;gap:7px}.hl-file-box strong{font-size:10px}.hl-file-box p{font-size:9px}.hl-file-button{font-size:9px!important;padding:0 9px;min-height:33px}.hl-track-list{max-height:100px}.hl-track{grid-template-columns:27px minmax(0,1fr) auto;gap:7px;padding:5px 6px}.hl-track-art{height:27px;width:27px}.hl-track-text strong{font-size:10px}.hl-now{grid-template-columns:34px minmax(0,1fr);padding:7px;gap:7px}.hl-cover{width:34px;height:34px}.hl-controls{grid-column:1/-1;justify-content:center}.hl-player-bottom{font-size:9px}.hl-volume{max-width:130px}.hl-volume input{width:65px}.hl-status-grid{margin-top:15px;gap:7px}.hl-status-item{padding:10px}.hl-status-item strong,.hl-status-item span{font-size:9px}.hl-feature-word{letter-spacing:-.08em}}
+@media(max-width:680px){#hlNewSite{min-height:500px}.hl-topbar{width:calc(100% - 24px);height:63px;gap:8px}.hl-brand-icon{width:34px;height:34px;border-radius:11px}.hl-brand-name{font-size:16px}.hl-brand-sub{font-size:7px;letter-spacing:.11em}.hl-actions{gap:5px}.hl-select,.hl-small-button{height:35px;padding:0 8px;font-size:10px!important}.hl-select{max-width:92px}.hl-project-nav-wrap{width:calc(100% - 16px);margin-bottom:9px}.hl-project-nav-wrap{overflow:visible}#hlNavShell{padding:4px;border-radius:16px}#hlNavRoot{border-radius:16px}.hl-nav-backdrop{border-radius:12px}#hlNavButtons{grid-template-columns:repeat(4,minmax(0,1fr));gap:1px}.hl-nav-indicator{left:4px;top:4px;bottom:4px;width:calc((100% - 8px - 3px)/4);border-radius:12px;transform:translateX(calc(var(--hl-slide,0) * (100% + 1px)))}.hl-tab{min-height:42px;display:flex;flex-direction:column;gap:4px;padding:4px 1px;font-size:8px!important;letter-spacing:-.02em}.hl-tab svg{width:14px;height:14px}#hlNewMain{width:calc(100% - 16px);margin-bottom:8px}#hlPanelRoot{height:100%}.hl-panel{border-radius:24px}.hl-panel-backdrop{border-radius:24px}.hl-content{padding:20px 17px}.hl-grid{grid-template-columns:1fr;gap:18px}.hl-title{font-size:clamp(36px,11vw,54px);margin:16px 0}.hl-copy{font-size:12px;line-height:1.7}.hl-cta-row{margin-top:19px}.hl-cta{min-height:41px;padding:0 12px;font-size:10px!important}.hl-meta-line{margin-top:19px;gap:11px;flex-wrap:wrap;font-size:9px}.hl-feature{min-height:155px;padding:15px;border-radius:17px;gap:10px}.hl-feature-word{font-size:52px;margin:13px 0}.hl-feature-bars{height:28px}.hl-feature-top,.hl-feature-bottom{font-size:8px}.hl-screen-head{margin-bottom:15px;gap:6px}.hl-screen-head .hl-title{font-size:33px;margin:10px 0 0}.hl-screen-head .hl-copy{font-size:10px;line-height:1.6}.hl-glasswave-grid{grid-template-columns:1fr;gap:9px}.hl-about{padding:15px;border-radius:17px}.hl-about-title{font-size:21px;margin:11px 0 7px}.hl-about-copy{font-size:10px;line-height:1.6}.hl-contact-link{margin-top:10px;font-size:9px;padding:8px 9px}.hl-player{padding:11px;border-radius:17px;gap:9px}.hl-player-head{font-size:10px}.hl-file-box{padding:10px;border-radius:13px;gap:7px}.hl-file-box strong{font-size:10px}.hl-file-box p{font-size:9px}.hl-file-button{font-size:9px!important;padding:0 9px;min-height:33px}.hl-track-list{max-height:100px}.hl-track{grid-template-columns:27px minmax(0,1fr) auto;gap:7px;padding:5px 6px}.hl-track-art{height:27px;width:27px}.hl-track-text strong{font-size:10px}.hl-now{grid-template-columns:34px minmax(0,1fr);padding:7px;gap:7px}.hl-cover{width:34px;height:34px}.hl-controls{grid-column:1/-1;justify-content:center}.hl-player-bottom{font-size:9px}.hl-volume{max-width:130px}.hl-volume input{width:65px}.hl-status-grid{margin-top:15px;gap:7px}.hl-status-item{padding:10px}.hl-status-item strong,.hl-status-item span{font-size:9px}.hl-feature-word{letter-spacing:-.08em}}
 @media(max-width:680px){#hlNavRoot{grid-template-columns:repeat(4,minmax(0,1fr))!important}.hl-nav-indicator{width:calc((100% - 8px - 3px)/4)!important}.hl-theme-toggle{min-width:98px;height:35px;padding:0 8px;font-size:10px!important}.hl-theme-menu{top:calc(100% + 6px);min-width:148px}.hl-v8v-visual{min-height:210px;padding:15px}.hl-v8v-word{font-size:85px;margin:21px 0}.hl-v8v-index{margin-top:10px}.hl-v8v-index span{padding:7px 4px;font-size:8px}}
 
 /* Mobile usability: let the document scroll and keep project navigation accessible. */
@@ -714,13 +718,17 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     </div>
   </header>
   <div class="hl-project-nav-wrap" aria-label="Choose a project">
-    <div id="hlNavRoot">
-      <div class="hl-nav-backdrop" aria-hidden="true"></div>
-      <span class="hl-nav-indicator" id="hlNavIndicator" aria-hidden="true"></span>
-      <button class="hl-tab" type="button" data-hl-project="overview" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 10 9-7 9 7v10H4V10M9 20v-6h6v6"/></svg><span data-hl-label="overviewTab">Overview</span></button>
-      <button class="hl-tab" type="button" data-hl-project="glasswave" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12h3l2-5 4 10 3-13 3 16 2-8h3"/></svg><span>Glasswave</span></button>
-      <button class="hl-tab" type="button" data-hl-project="v8v" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6 7 18h2l3-9 3 9h2l4-12"/></svg><span>V8V Studio</span></button>
-      <button class="hl-tab" type="button" data-hl-project="releases" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span data-hl-label="releasesTab">Releases</span></button>
+    <div id="hlNavShell">
+      <div id="hlNavRoot" aria-hidden="true">
+        <div class="hl-nav-backdrop" aria-hidden="true"></div>
+        <span class="hl-nav-indicator" id="hlNavIndicator" aria-hidden="true"></span>
+      </div>
+      <div id="hlNavButtons">
+        <button class="hl-tab" type="button" data-hl-project="overview" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 10 9-7 9 7v10H4V10M9 20v-6h6v6"/></svg><span data-hl-label="overviewTab">Overview</span></button>
+        <button class="hl-tab" type="button" data-hl-project="glasswave" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12h3l2-5 4 10 3-13 3 16 2-8h3"/></svg><span>Glasswave</span></button>
+        <button class="hl-tab" type="button" data-hl-project="v8v" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6 7 18h2l3-9 3 9h2l4-12"/></svg><span>V8V Studio</span></button>
+        <button class="hl-tab" type="button" data-hl-project="releases" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span data-hl-label="releasesTab">Releases</span></button>
+      </div>
     </div>
   </div>
   <main id="hlNewMain">
@@ -747,11 +755,8 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   const tabs = Array.from(document.querySelectorAll('.hl-tab'));
   const requestedProject = new URLSearchParams(window.location.search).get('project');
   const state = { project:['overview','glasswave','v8v','releases'].includes(requestedProject) ? requestedProject : 'overview', lang:(navigator.language || 'en').toLowerCase().startsWith('ru')?'ru':'en', theme:'auto', tracks:[], index:-1, repeat:true, seeking:false, toastTimer:0 };
-  let LiquidGlassModule=null;
   let navGlassInstance=null;
   let panelGlassInstance=null;
-  let glassRefreshTimer=0;
-  let glassInitVersion=0;
   const uiSounds = {
     select: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/select.mp3'),
     copy: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/copy.mp3')
@@ -820,7 +825,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     canonicalTag.href=canonical.href;
     document.getElementById('hlOgUrl').content=canonical.href;
   }
-  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();scheduleLiquidGlassRefresh();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
+  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
   function selectProject(id){if(!['overview','glasswave','v8v','releases'].includes(id))return;state.project=id;const url=new URL(window.location.href);if(id==='overview')url.searchParams.delete('project');else url.searchParams.set('project',id);window.history.replaceState(null,'',url);renderProject();}
   panel.addEventListener('click',async event=>{const trigger=event.target.closest('[data-copy-email]');if(!trigger)return;event.preventDefault();const address=trigger.dataset.copyEmail;let copied=false;try{await navigator.clipboard.writeText(address);copied=true;}catch(e){const field=document.createElement('textarea');field.value=address;field.readOnly=true;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();try{copied=document.execCommand('copy');}catch(error){}field.remove();}if(copied){playUISound('copy');notice((state.lang==='ru'?'Скопировано: ':'Copied: ')+address,true);}else notice(state.lang==='ru'?'Не удалось скопировать адрес.':'Could not copy the address.',false);});
   function formatTime(v){if(!Number.isFinite(v)||v<0)return '0:00';return Math.floor(v/60)+':'+String(Math.floor(v%60)).padStart(2,'0');}
@@ -841,43 +846,37 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   langButton.addEventListener('click',()=>{state.lang=state.lang==='ru'?'en':'ru';applyLanguage();});
   try{state.theme=localStorage.getItem('handylabs-theme')||'auto';}catch(e){}if(!['auto','light','dark'].includes(state.theme))state.theme='auto';root.dataset.theme=state.theme;renderThemeMenu();
   themeToggle.addEventListener('click',()=>{if(themeToggle.getAttribute('aria-expanded')==='true')closeThemeMenu();else openThemeMenu();});
-  themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.hlTheme;root.dataset.theme=state.theme;try{localStorage.setItem('handylabs-theme',state.theme);}catch(e){}renderThemeMenu();closeThemeMenu();scheduleLiquidGlassRefresh();playUISound('select');}));
+  themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.hlTheme;root.dataset.theme=state.theme;try{localStorage.setItem('handylabs-theme',state.theme);}catch(e){}renderThemeMenu();closeThemeMenu();refreshGlassForThemeChange();playUISound('select');}));
   document.addEventListener('click',event=>{if(!event.target.closest('.hl-theme-wrap'))closeThemeMenu();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape')closeThemeMenu();});
   applyLanguage();document.documentElement.dataset.handyLiquidGlass='loading';
   const cdn='https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
   const setConfig=(el,config)=>{el.dataset.config=JSON.stringify(config);};
   const sharedGlassConfig={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};
-  async function rebuildLiquidGlass(){
-    if(!LiquidGlassModule)return;
-    const version=++glassInitVersion;
-    try{navGlassInstance?.destroy();}catch(e){}
-    try{panelGlassInstance?.destroy();}catch(e){}
-    navGlassInstance=null;panelGlassInstance=null;
-    setConfig(indicator,{blurAmount:0,refraction:.69,chromAberration:.05,edgeHighlight:.2,specular:0,fresnel:1,distortion:0,cornerRadius:16,zRadius:16,opacity:1,saturation:0,tintStrength:0,brightness:0,shadowOpacity:.25,shadowSpread:10,shadowOffsetY:1});
-    setConfig(panel,sharedGlassConfig);
+  function refreshGlassForThemeChange(){
+    navGlassInstance?.markChanged();
+    const marker=document.createComment('liquid-glass-theme-refresh');
+    panel.appendChild(marker);
+    marker.remove();
+  }
+  (async()=>{
     try{
-      if(document.fonts?.ready)await document.fonts.ready;
-      const [nextNav,nextPanel]=await Promise.all([
-        LiquidGlassModule.init({root:navRoot,glassElements:[indicator],defaults:sharedGlassConfig}),
-        LiquidGlassModule.init({root:panelRoot,glassElements:[panel],defaults:sharedGlassConfig})
+      const mod=await import(cdn);
+      const LiquidGlass=mod.LiquidGlass;
+      setConfig(indicator,{blurAmount:.04,refraction:.9,chromAberration:.012,edgeHighlight:.13,specular:.035,fresnel:.7,cornerRadius:15,zRadius:17,opacity:.72,saturation:.08,tintStrength:.16,brightness:-.035,shadowOpacity:.11,shadowSpread:8,shadowOffsetY:2});
+      setConfig(panel,sharedGlassConfig);
+      const [navInstance,panelInstance]=await Promise.all([
+        LiquidGlass.init({root:navRoot,glassElements:[indicator],defaults:sharedGlassConfig}),
+        LiquidGlass.init({root:panelRoot,glassElements:[panel],defaults:sharedGlassConfig})
       ]);
-      if(version!==glassInitVersion){nextNav.destroy();nextPanel.destroy();return;}
-      navGlassInstance=nextNav;panelGlassInstance=nextPanel;
+      navGlassInstance=navInstance;
+      panelGlassInstance=panelInstance;
       document.documentElement.dataset.handyLiquidGlass='ready';
     }catch(err){
-      if(version===glassInitVersion){
-        document.documentElement.dataset.handyLiquidGlass='fallback';
-        console.warn('LiquidGlass initialization failed; using CSS fallback.',err);
-      }
+      document.documentElement.dataset.handyLiquidGlass='fallback';
+      console.warn('LiquidGlass initialization failed; using CSS fallback.',err);
     }
-  }
-  function scheduleLiquidGlassRefresh(){
-    if(!LiquidGlassModule)return;
-    window.clearTimeout(glassRefreshTimer);
-    glassRefreshTimer=window.setTimeout(()=>{void rebuildLiquidGlass();},120);
-  }
-  (async()=>{try{const mod=await import(cdn);LiquidGlassModule=mod.LiquidGlass;await rebuildLiquidGlass();}catch(err){document.documentElement.dataset.handyLiquidGlass='fallback';notice(text('glassFallback'));console.warn('LiquidGlass CDN unavailable; using CSS glass fallback.',err);}})();
+  })();
   window.addEventListener('beforeunload',()=>state.tracks.forEach(track=>URL.revokeObjectURL(track.url)));
 })();
 </script>
