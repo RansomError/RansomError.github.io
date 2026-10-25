@@ -747,6 +747,11 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   const tabs = Array.from(document.querySelectorAll('.hl-tab'));
   const requestedProject = new URLSearchParams(window.location.search).get('project');
   const state = { project:['overview','glasswave','v8v','releases'].includes(requestedProject) ? requestedProject : 'overview', lang:(navigator.language || 'en').toLowerCase().startsWith('ru')?'ru':'en', theme:'auto', tracks:[], index:-1, repeat:true, seeking:false, toastTimer:0 };
+  let LiquidGlassModule=null;
+  let navGlassInstance=null;
+  let panelGlassInstance=null;
+  let glassRefreshTimer=0;
+  let glassInitVersion=0;
   const uiSounds = {
     select: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/select.mp3'),
     copy: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/copy.mp3')
@@ -843,11 +848,6 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   const cdn='https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
   const setConfig=(el,config)=>{el.dataset.config=JSON.stringify(config);};
   const sharedGlassConfig={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};
-  let LiquidGlassModule=null;
-  let navGlassInstance=null;
-  let panelGlassInstance=null;
-  let glassRefreshTimer=0;
-  let glassInitVersion=0;
   async function rebuildLiquidGlass(){
     if(!LiquidGlassModule)return;
     const version=++glassInitVersion;
