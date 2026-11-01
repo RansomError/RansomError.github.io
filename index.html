@@ -838,7 +838,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     if(state.lang!=='ru')return;
     const card=document.createElement('aside');
     card.className='hl-shop-recommendation';
-    card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-kрестьянин" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.webp" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
+    card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.webp" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
     const image=card.querySelector('.hl-shop-image');
     image.addEventListener('error',()=>{image.hidden=true;});
     panel.appendChild(card);
