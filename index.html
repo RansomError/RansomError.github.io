@@ -768,7 +768,9 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   const root = document.getElementById('hlNewSite');
   const panel = document.getElementById('hlNewPanel');
   const navRoot = document.getElementById('hlNavRoot');
+  const navShell = document.getElementById('hlNavShell');
   const indicator = document.getElementById('hlNavIndicator');
+  const mainSurface = document.getElementById('hlNewMain');
   const panelRoot = document.getElementById('hlPanelRoot');
   const backdrop = document.getElementById('hlPanelBackdrop');
   const audio = document.getElementById('hlNewAudio');
@@ -781,10 +783,12 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   let navGlassInstance=null;
   let panelGlassInstance=null;
   const uiSounds = {
+    hover: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/hover.mp3'),
+    press: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/press.mp3'),
     select: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/select.mp3'),
     copy: new Audio('https://cdn.jsdelivr.net/gh/romainsimon/uisfx@main/packages/uisfx/sounds/glass/copy.mp3')
   };
-  Object.values(uiSounds).forEach(sound=>{sound.preload='auto';sound.volume=.16;});
+  Object.entries(uiSounds).forEach(([kind,sound])=>{sound.preload='none';sound.volume=({hover:.055,press:.065,select:.11,copy:.10})[kind]||.08;});
   function playUISound(kind){const sound=uiSounds[kind];if(!sound)return;try{sound.currentTime=0;const playback=sound.play();if(playback&&typeof playback.catch==='function')playback.catch(()=>{});}catch(e){}}
   const copy = {
     en: {
@@ -858,15 +862,27 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.jpg" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
     const image=card.querySelector('.hl-shop-image');
     image.addEventListener('error',()=>{image.hidden=true;});
-    (window.innerWidth>=900?root:panel).appendChild(card);
+    (window.innerWidth>=1800?root:panel).appendChild(card);
   }
   function syncShopRecommendationPlacement(){
     const card=document.getElementById('hlShopRecommendation');
     if(!card||state.lang!=='ru')return;
-    const target=window.innerWidth>=900?root:panel;
+    const target=window.innerWidth>=1800?root:panel;
     if(card.parentElement!==target)target.appendChild(card);
   }
-  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();appendShopRecommendation();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
+  let navMotionRaf=0;
+  function followLiquidNavTransition(){
+    if(!navGlassInstance)return;
+    if(navMotionRaf)cancelAnimationFrame(navMotionRaf);
+    const endAt=performance.now()+760;
+    const tick=now=>{
+      navGlassInstance?.markChanged();
+      if(now<endAt)navMotionRaf=requestAnimationFrame(tick);
+      else navMotionRaf=0;
+    };
+    navMotionRaf=requestAnimationFrame(tick);
+  }
+  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();appendShopRecommendation();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)navShell.style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();panelGlassInstance?.markChanged();followLiquidNavTransition();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
   function selectProject(id){if(!['overview','glasswave','v8v','releases'].includes(id))return;state.project=id;const url=new URL(window.location.href);if(id==='overview')url.searchParams.delete('project');else url.searchParams.set('project',id);window.history.replaceState(null,'',url);renderProject();}
   panel.addEventListener('click',async event=>{const trigger=event.target.closest('[data-copy-email]');if(!trigger)return;event.preventDefault();const address=trigger.dataset.copyEmail;let copied=false;try{await navigator.clipboard.writeText(address);copied=true;}catch(e){const field=document.createElement('textarea');field.value=address;field.readOnly=true;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();try{copied=document.execCommand('copy');}catch(error){}field.remove();}if(copied){playUISound('copy');notice((state.lang==='ru'?'Скопировано: ':'Copied: ')+address,true);}else notice(state.lang==='ru'?'Не удалось скопировать адрес.':'Could not copy the address.',false);});
   function formatTime(v){if(!Number.isFinite(v)||v<0)return '0:00';return Math.floor(v/60)+':'+String(Math.floor(v%60)).padStart(2,'0');}
@@ -882,7 +898,22 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   function closeThemeMenu(){themeToggle.setAttribute('aria-expanded','false');themeMenu.classList.remove('open');window.setTimeout(()=>{if(!themeMenu.classList.contains('open'))themeMenu.hidden=true;},200);}
   function openThemeMenu(){themeMenu.hidden=false;themeToggle.setAttribute('aria-expanded','true');requestAnimationFrame(()=>themeMenu.classList.add('open'));}
   function applyLanguage(){document.documentElement.lang=state.lang;root.dataset.lang=state.lang;langButton.textContent=state.lang==='ru'?'EN':'RU';document.getElementById('hlNewBrandSub').textContent=text('brandSub');tabs.forEach(tab=>{const key=tab.querySelector('[data-hl-label]')?.dataset.hlLabel;if(key)tab.querySelector('[data-hl-label]').textContent=text(key);});renderProject();renderThemeMenu();}
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{playUISound('select');selectProject(tab.dataset.hlProject);}));
+  tabs.forEach(tab=>{
+    tab.addEventListener('pointerenter',()=>playUISound('hover'));
+    tab.addEventListener('pointerdown',()=>playUISound('press'));
+    tab.addEventListener('click',()=>{playUISound('select');selectProject(tab.dataset.hlProject);});
+  });
+  [langButton,themeToggle].forEach(control=>{
+    control.addEventListener('pointerenter',()=>playUISound('hover'));
+    control.addEventListener('pointerdown',()=>playUISound('press'));
+  });
+  panel.addEventListener('pointerover',event=>{
+    const control=event.target.closest('.hl-cta,.hl-contact-link,.hl-info-link');
+    if(control&&!control.contains(event.relatedTarget))playUISound('hover');
+  });
+  panel.addEventListener('pointerdown',event=>{
+    if(event.target.closest('.hl-cta,.hl-contact-link,.hl-info-link'))playUISound('press');
+  });
   document.getElementById('hlNewHome').addEventListener('click',e=>{e.preventDefault();selectProject('overview');});
   langButton.addEventListener('click',()=>{state.lang=state.lang==='ru'?'en':'ru';applyLanguage();});
   window.addEventListener('resize',syncShopRecommendationPlacement);
@@ -894,25 +925,30 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   applyLanguage();document.documentElement.dataset.handyLiquidGlass='loading';
   const cdn='https://cdn.jsdelivr.net/npm/@ybouane/liquidglass@1.0.3/dist/index.js';
   const setConfig=(el,config)=>{el.dataset.config=JSON.stringify(config);};
-  const sharedGlassConfig={blurAmount:.12,refraction:.82,chromAberration:.018,edgeHighlight:.09,specular:.035,fresnel:.68,distortion:.008,cornerRadius:28,zRadius:20,opacity:.54,saturation:.08,tintStrength:.16,brightness:-.045,shadowOpacity:.16,shadowSpread:14,shadowOffsetY:3};
+  const pageGlassConfig={blurAmount:.11,refraction:1.08,chromAberration:.105,edgeHighlight:.22,specular:.16,fresnel:.9,distortion:.012,cornerRadius:32,zRadius:29,opacity:.34,saturation:.24,tintStrength:.065,brightness:.018,shadowOpacity:.18,shadowSpread:18,shadowOffsetY:4};
+  const navGlassConfig={blurAmount:.07,refraction:1.14,chromAberration:.12,edgeHighlight:.24,specular:.18,fresnel:.92,distortion:.01,cornerRadius:15,zRadius:17,opacity:.3,saturation:.26,tintStrength:.07,brightness:.025,shadowOpacity:.17,shadowSpread:10,shadowOffsetY:2};
+  const tabGlassConfig={button:true,blurAmount:.065,refraction:.92,chromAberration:.07,edgeHighlight:.16,specular:.12,fresnel:.82,cornerRadius:14,zRadius:15,opacity:.32,saturation:.2,tintStrength:.055,brightness:.015,shadowOpacity:.13,shadowSpread:7,shadowOffsetY:2};
   function refreshGlassForThemeChange(){
     navGlassInstance?.markChanged();
-    const marker=document.createComment('liquid-glass-theme-refresh');
-    panel.appendChild(marker);
-    marker.remove();
+    panelGlassInstance?.markChanged();
   }
   (async()=>{
     try{
       const mod=await import(cdn);
       const LiquidGlass=mod.LiquidGlass;
-      setConfig(indicator,{blurAmount:.04,refraction:.9,chromAberration:.012,edgeHighlight:.13,specular:.035,fresnel:.7,cornerRadius:15,zRadius:17,opacity:.72,saturation:.08,tintStrength:.16,brightness:-.035,shadowOpacity:.11,shadowSpread:8,shadowOffsetY:2});
-      setConfig(panel,sharedGlassConfig);
-      const [navInstance,panelInstance]=await Promise.all([
-        LiquidGlass.init({root:navRoot,glassElements:[indicator],defaults:sharedGlassConfig}),
-        LiquidGlass.init({root:panelRoot,glassElements:[panel],defaults:sharedGlassConfig})
+      setConfig(indicator,navGlassConfig);
+      tabs.forEach(tab=>setConfig(tab,tabGlassConfig));
+      setConfig(mainSurface,pageGlassConfig);
+      const [navInstance,pageInstance]=await Promise.all([
+        LiquidGlass.init({root:navShell,glassElements:[indicator,...tabs],defaults:navGlassConfig}),
+        LiquidGlass.init({root,glassElements:[mainSurface],defaults:pageGlassConfig})
       ]);
       navGlassInstance=navInstance;
-      panelGlassInstance=panelInstance;
+      panelGlassInstance=pageInstance;
+      root.style.userSelect='';
+      root.style.webkitUserSelect='';
+      navGlassInstance.markChanged();
+      panelGlassInstance.markChanged();
       document.documentElement.dataset.handyLiquidGlass='ready';
     }catch(err){
       document.documentElement.dataset.handyLiquidGlass='fallback';
