@@ -694,6 +694,18 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
 #hlNewSite .hl-brand-copy{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
 #hlNewSite .hl-brand-sub{display:block;margin-top:0}
 
+#hlNewSite .hl-shop-recommendation{width:min(920px,calc(100% - clamp(32px,8vw,108px)));margin:0 auto 26px;border:1px solid var(--hl-line);border-radius:22px;overflow:hidden;background:linear-gradient(125deg,rgba(177,255,236,.10),rgba(168,190,255,.07) 58%,rgba(255,255,255,.035));box-shadow:0 16px 42px rgba(0,0,0,.11),inset 0 1px 0 rgba(255,255,255,.45)}
+#hlNewSite .hl-shop-recommendation>a{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 18px;min-height:154px}
+#hlNewSite .hl-shop-info{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+#hlNewSite .hl-shop-kicker{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:850;color:var(--hl-muted)}
+#hlNewSite .hl-shop-title{font-size:clamp(17px,2.2vw,22px);font-weight:850;letter-spacing:-.04em}
+#hlNewSite .hl-shop-description{font-size:11px;line-height:1.6;color:var(--hl-muted)}
+#hlNewSite .hl-shop-action{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:9px 12px;border:1px solid var(--hl-line);border-radius:12px;background:var(--hl-panel-2);font-size:10px;font-weight:800}
+#hlNewSite .hl-shop-image{width:min(34%,310px);height:142px;flex:none;object-fit:contain;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--hl-line)}
+#hlNewSite .hl-shop-recommendation>a:hover .hl-shop-action{border-color:color-mix(in srgb,var(--hl-accent2) 50%,var(--hl-line))}
+#hlNewSite .hl-shop-recommendation>a:focus-visible{outline-offset:-4px}
+@media(max-width:680px){#hlNewSite .hl-shop-recommendation{width:calc(100% - 34px);margin-bottom:18px;border-radius:17px}#hlNewSite .hl-shop-recommendation>a{gap:12px;padding:12px;min-height:112px}#hlNewSite .hl-shop-image{width:34%;height:98px;border-radius:11px}#hlNewSite .hl-shop-kicker{font-size:8px}#hlNewSite .hl-shop-title{font-size:15px}#hlNewSite .hl-shop-description{font-size:9px}#hlNewSite .hl-shop-action{font-size:9px;padding:7px 9px}}
+
 </style>
 <div id="hlNewSite" data-theme="auto">
   <div class="hl-ambient" aria-hidden="true"></div>
@@ -822,7 +834,16 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     canonicalTag.href=canonical.href;
     document.getElementById('hlOgUrl').content=canonical.href;
   }
-  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
+  function appendShopRecommendation(){
+    if(state.lang!=='ru')return;
+    const card=document.createElement('aside');
+    card.className='hl-shop-recommendation';
+    card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-kрестьянин" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.webp" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
+    const image=card.querySelector('.hl-shop-image');
+    image.addEventListener('error',()=>{image.hidden=true;});
+    panel.appendChild(card);
+  }
+  function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();appendShopRecommendation();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
   function selectProject(id){if(!['overview','glasswave','v8v','releases'].includes(id))return;state.project=id;const url=new URL(window.location.href);if(id==='overview')url.searchParams.delete('project');else url.searchParams.set('project',id);window.history.replaceState(null,'',url);renderProject();}
   panel.addEventListener('click',async event=>{const trigger=event.target.closest('[data-copy-email]');if(!trigger)return;event.preventDefault();const address=trigger.dataset.copyEmail;let copied=false;try{await navigator.clipboard.writeText(address);copied=true;}catch(e){const field=document.createElement('textarea');field.value=address;field.readOnly=true;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();try{copied=document.execCommand('copy');}catch(error){}field.remove();}if(copied){playUISound('copy');notice((state.lang==='ru'?'Скопировано: ':'Copied: ')+address,true);}else notice(state.lang==='ru'?'Не удалось скопировать адрес.':'Could not copy the address.',false);});
   function formatTime(v){if(!Number.isFinite(v)||v<0)return '0:00';return Math.floor(v/60)+':'+String(Math.floor(v%60)).padStart(2,'0');}
