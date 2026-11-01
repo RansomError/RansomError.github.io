@@ -704,7 +704,26 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
 #hlNewSite .hl-shop-image{width:126px;height:168px;flex:none;object-fit:cover;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--hl-line)}
 #hlNewSite .hl-shop-recommendation>a:hover .hl-shop-action{border-color:color-mix(in srgb,var(--hl-accent2) 50%,var(--hl-line))}
 #hlNewSite .hl-shop-recommendation>a:focus-visible{outline-offset:-4px}
-@media(max-width:680px){#hlNewSite .hl-shop-recommendation{width:calc(100% - 34px);margin-bottom:18px;border-radius:17px}#hlNewSite .hl-shop-recommendation>a{gap:12px;padding:12px;min-height:112px}#hlNewSite .hl-shop-image{width:80px;height:108px;border-radius:11px}#hlNewSite .hl-shop-kicker{font-size:8px}#hlNewSite .hl-shop-title{font-size:15px}#hlNewSite .hl-shop-description{font-size:9px}#hlNewSite .hl-shop-action{font-size:9px;padding:7px 9px}}
+@media(min-width:900px){
+  #hlNewSite[data-lang="ru"] .hl-topbar,
+  #hlNewSite[data-lang="ru"] .hl-project-nav-wrap,
+  #hlNewSite[data-lang="ru"] #hlNewMain{width:min(1100px,calc(100% - max(40px,calc(100% - 1320px)) - 18px - clamp(180px,15vw,220px)));margin-left:max(20px,calc((100% - 1320px)/2));margin-right:0}
+  #hlNewSite[data-lang="ru"] .hl-shop-recommendation{position:absolute;z-index:30;top:50%;right:max(20px,calc((100% - 1320px)/2));transform:translateY(-50%);width:clamp(180px,15vw,220px);max-height:calc(100% - 150px);overflow:auto;margin:0;border-radius:22px}
+  #hlNewSite[data-lang="ru"] .hl-shop-recommendation>a{min-height:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:13px;padding:14px}
+  #hlNewSite[data-lang="ru"] .hl-shop-image{order:-1;width:100%;height:205px;object-fit:contain;border-radius:14px}
+  #hlNewSite[data-lang="ru"] .hl-shop-title{font-size:17px}
+  #hlNewSite[data-lang="ru"] .hl-shop-description{font-size:10px}
+  #hlNewSite[data-lang="ru"] .hl-shop-action{justify-content:center;width:100%;font-size:9px;padding:9px 8px}
+}
+@media(max-width:899px){
+  #hlNewSite .hl-shop-recommendation{width:calc(100% - 34px);margin:0 auto 18px;border-radius:17px}
+  #hlNewSite .hl-shop-recommendation>a{gap:12px;padding:12px;min-height:112px}
+  #hlNewSite .hl-shop-image{width:80px;height:108px;border-radius:11px}
+  #hlNewSite .hl-shop-kicker{font-size:8px}
+  #hlNewSite .hl-shop-title{font-size:15px}
+  #hlNewSite .hl-shop-description{font-size:9px}
+  #hlNewSite .hl-shop-action{font-size:9px;padding:7px 9px}
+}
 
 </style>
 <div id="hlNewSite" data-theme="auto">
@@ -835,13 +854,22 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     document.getElementById('hlOgUrl').content=canonical.href;
   }
   function appendShopRecommendation(){
+    document.getElementById('hlShopRecommendation')?.remove();
     if(state.lang!=='ru')return;
     const card=document.createElement('aside');
+    card.id='hlShopRecommendation';
     card.className='hl-shop-recommendation';
+    card.setAttribute('aria-label','Рекомендация магазина');
     card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.jpg" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
     const image=card.querySelector('.hl-shop-image');
     image.addEventListener('error',()=>{image.hidden=true;});
-    panel.appendChild(card);
+    (window.innerWidth>=900?root:panel).appendChild(card);
+  }
+  function syncShopRecommendationPlacement(){
+    const card=document.getElementById('hlShopRecommendation');
+    if(!card||state.lang!=='ru')return;
+    const target=window.innerWidth>=900?root:panel;
+    if(card.parentElement!==target)target.appendChild(card);
   }
   function renderProject(){const views={overview:overviewView,glasswave:glasswaveView,v8v:v8vView,releases:releasesView};panel.innerHTML=views[state.project]();appendShopRecommendation();setScene();tabs.forEach((tab,i)=>{const active=tab.dataset.hlProject===state.project;tab.setAttribute('aria-pressed',String(active));if(active)document.getElementById('hlNavRoot').style.setProperty('--hl-slide',String(i));});document.documentElement.dataset.handyProject=state.project;updatePageMetadata();navGlassInstance?.markChanged();if(state.project==='glasswave')bindPlayer();else{const open=document.getElementById('hlOpenGlasswave');if(open)open.addEventListener('click',()=>selectProject('glasswave'));}const releaseLink=document.getElementById('hlReleaseFromGlass');if(releaseLink)releaseLink.addEventListener('click',e=>{e.preventDefault();selectProject('releases');});}
   function selectProject(id){if(!['overview','glasswave','v8v','releases'].includes(id))return;state.project=id;const url=new URL(window.location.href);if(id==='overview')url.searchParams.delete('project');else url.searchParams.set('project',id);window.history.replaceState(null,'',url);renderProject();}
@@ -858,10 +886,11 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
   function renderThemeMenu(){const labels=state.lang==='ru'?{auto:'Система',light:'Светлая',dark:'Тёмная'}:{auto:'System',light:'Light',dark:'Dark'};const symbols={auto:'◐',light:'☼',dark:'◑'};document.getElementById('hlNewThemeLabel').textContent=symbols[state.theme]+' '+labels[state.theme];themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>{const mode=button.dataset.hlTheme;button.setAttribute('aria-checked',String(mode===state.theme));button.querySelector('[data-hl-theme-label]').textContent=labels[mode];});}
   function closeThemeMenu(){themeToggle.setAttribute('aria-expanded','false');themeMenu.classList.remove('open');window.setTimeout(()=>{if(!themeMenu.classList.contains('open'))themeMenu.hidden=true;},200);}
   function openThemeMenu(){themeMenu.hidden=false;themeToggle.setAttribute('aria-expanded','true');requestAnimationFrame(()=>themeMenu.classList.add('open'));}
-  function applyLanguage(){document.documentElement.lang=state.lang;langButton.textContent=state.lang==='ru'?'EN':'RU';document.getElementById('hlNewBrandSub').textContent=text('brandSub');tabs.forEach(tab=>{const key=tab.querySelector('[data-hl-label]')?.dataset.hlLabel;if(key)tab.querySelector('[data-hl-label]').textContent=text(key);});renderProject();renderThemeMenu();}
+  function applyLanguage(){document.documentElement.lang=state.lang;root.dataset.lang=state.lang;langButton.textContent=state.lang==='ru'?'EN':'RU';document.getElementById('hlNewBrandSub').textContent=text('brandSub');tabs.forEach(tab=>{const key=tab.querySelector('[data-hl-label]')?.dataset.hlLabel;if(key)tab.querySelector('[data-hl-label]').textContent=text(key);});renderProject();renderThemeMenu();}
   tabs.forEach(tab=>tab.addEventListener('click',()=>{playUISound('select');selectProject(tab.dataset.hlProject);}));
   document.getElementById('hlNewHome').addEventListener('click',e=>{e.preventDefault();selectProject('overview');});
   langButton.addEventListener('click',()=>{state.lang=state.lang==='ru'?'en':'ru';applyLanguage();});
+  window.addEventListener('resize',syncShopRecommendationPlacement);
   try{state.theme=localStorage.getItem('handylabs-theme')||'auto';}catch(e){}if(!['auto','light','dark'].includes(state.theme))state.theme='auto';root.dataset.theme=state.theme;renderThemeMenu();
   themeToggle.addEventListener('click',()=>{if(themeToggle.getAttribute('aria-expanded')==='true')closeThemeMenu();else openThemeMenu();});
   themeMenu.querySelectorAll('[data-hl-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.hlTheme;root.dataset.theme=state.theme;try{localStorage.setItem('handylabs-theme',state.theme);}catch(e){}renderThemeMenu();closeThemeMenu();refreshGlassForThemeChange();playUISound('select');}));
