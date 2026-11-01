@@ -701,10 +701,10 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
 #hlNewSite .hl-shop-title{font-size:clamp(17px,2.2vw,22px);font-weight:850;letter-spacing:-.04em}
 #hlNewSite .hl-shop-description{font-size:11px;line-height:1.6;color:var(--hl-muted)}
 #hlNewSite .hl-shop-action{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:9px 12px;border:1px solid var(--hl-line);border-radius:12px;background:var(--hl-panel-2);font-size:10px;font-weight:800}
-#hlNewSite .hl-shop-image{width:min(34%,310px);height:142px;flex:none;object-fit:contain;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--hl-line)}
+#hlNewSite .hl-shop-image{width:126px;height:168px;flex:none;object-fit:cover;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--hl-line)}
 #hlNewSite .hl-shop-recommendation>a:hover .hl-shop-action{border-color:color-mix(in srgb,var(--hl-accent2) 50%,var(--hl-line))}
 #hlNewSite .hl-shop-recommendation>a:focus-visible{outline-offset:-4px}
-@media(max-width:680px){#hlNewSite .hl-shop-recommendation{width:calc(100% - 34px);margin-bottom:18px;border-radius:17px}#hlNewSite .hl-shop-recommendation>a{gap:12px;padding:12px;min-height:112px}#hlNewSite .hl-shop-image{width:34%;height:98px;border-radius:11px}#hlNewSite .hl-shop-kicker{font-size:8px}#hlNewSite .hl-shop-title{font-size:15px}#hlNewSite .hl-shop-description{font-size:9px}#hlNewSite .hl-shop-action{font-size:9px;padding:7px 9px}}
+@media(max-width:680px){#hlNewSite .hl-shop-recommendation{width:calc(100% - 34px);margin-bottom:18px;border-radius:17px}#hlNewSite .hl-shop-recommendation>a{gap:12px;padding:12px;min-height:112px}#hlNewSite .hl-shop-image{width:80px;height:108px;border-radius:11px}#hlNewSite .hl-shop-kicker{font-size:8px}#hlNewSite .hl-shop-title{font-size:15px}#hlNewSite .hl-shop-description{font-size:9px}#hlNewSite .hl-shop-action{font-size:9px;padding:7px 9px}}
 
 </style>
 <div id="hlNewSite" data-theme="auto">
@@ -838,7 +838,7 @@ body > header.site-header, body > main, body > footer.footer, body > .toast { di
     if(state.lang!=='ru')return;
     const card=document.createElement('aside');
     card.className='hl-shop-recommendation';
-    card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.webp" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
+    card.innerHTML='<a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span class="hl-shop-info"><span class="hl-shop-kicker">Рекомендация магазина</span><strong class="hl-shop-title">Православный крестьянин</strong><span class="hl-shop-description">Посмотрите товары в магазине на Ozon.</span><span class="hl-shop-action">Открыть магазин на Ozon <span aria-hidden="true">↗</span></span></span><img class="hl-shop-image" src="/pravoslavnyy-krestyanin-banner.jpg" alt="Витрина магазина «Православный крестьянин»" loading="lazy" decoding="async"></a>';
     const image=card.querySelector('.hl-shop-image');
     image.addEventListener('error',()=>{image.hidden=true;});
     panel.appendChild(card);
