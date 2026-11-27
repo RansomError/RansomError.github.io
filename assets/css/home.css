@@ -2,9 +2,9 @@
    Technique credits (MIT): ticker = Magic UI Marquee (keyframes, --gap/--duration); plate border/spotlight = Magic UI Magic Card;
    V8V texture = Animata Diagonal Lines; corner = Uiverse "go-corner" card by Prince4fff (markup pattern, own CSS). */
 :root{--gl:color-mix(in srgb,var(--fg) 9%,transparent)}
-.hero{position:relative;isolation:isolate;padding:clamp(.5rem,3vw,2rem) 0 1rem}
-.hero::before{content:"";position:absolute;z-index:-2;inset:-6rem calc(50% - 50vw) 0;background:linear-gradient(var(--gl) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,var(--gl) 1px,transparent 1px) 0 0/44px 44px;-webkit-mask-image:radial-gradient(ellipse 75% 85% at 25% 30%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 75% 85% at 25% 30%,#000 20%,transparent 75%)}
-.sig{position:absolute;z-index:-1;inset-inline-start:calc(50% - 50vw);top:30%;width:100vw;height:9rem;color:var(--acc);opacity:.5;pointer-events:none}
+.hero{position:relative;isolation:isolate;padding:clamp(.5rem,3vw,2rem) 0 4rem}
+.hero::before{content:"";position:absolute;z-index:-2;inset:-6rem calc(50% - 50vw) -3rem;background:linear-gradient(var(--gl) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,var(--gl) 1px,transparent 1px) 0 0/44px 44px;-webkit-mask-image:radial-gradient(ellipse 75% 85% at 25% 30%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 75% 85% at 25% 30%,#000 20%,transparent 75%)}
+.sig{position:absolute;z-index:-1;inset-inline-start:calc(50% - 50vw);bottom:.2rem;width:100vw;height:3.4rem;color:var(--acc);opacity:.6;pointer-events:none}
 .sig path{fill:none;stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:240 1160;animation:sig 10s linear infinite}
 .sig path+path{opacity:.4;animation-duration:15s;animation-direction:reverse}
 @keyframes sig{to{stroke-dashoffset:-1400}}
@@ -14,10 +14,10 @@
 .hero .lead{animation:rise .9s .1s cubic-bezier(.2,.7,.1,1) both}.hero .btns{animation:rise .9s .2s cubic-bezier(.2,.7,.1,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}}
 .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:0;padding:0;list-style:none}
-.chip{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem .9rem;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--pan) 80%,transparent);font-size:.9rem;color:var(--mut)}
+.chip{display:inline-flex;align-items:center;flex-wrap:wrap;gap:.2rem .55rem;padding:.45rem .9rem;border:1px solid var(--line);border-radius:1.25rem;background:color-mix(in srgb,var(--pan) 80%,transparent);font-size:.9rem;color:var(--mut)}
 .chip b{color:var(--fg);font-weight:600}.chip i{width:.55rem;height:.55rem;border-radius:50%;background:var(--c);color:var(--c);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 currentColor}70%,100%{box-shadow:0 0 0 .55rem transparent}}
-.tick{--gap:2.5rem;display:flex;gap:var(--gap);overflow:hidden;margin:2.5rem calc(50% - 50vw) 0;padding:.9rem 0;border-block:1px solid var(--line);white-space:nowrap}
+.tick{--gap:2.5rem;display:flex;gap:var(--gap);overflow:hidden;margin:0 calc(50% - 50vw);padding:.9rem 0;border-block:1px solid var(--line);white-space:nowrap}
 .tick>div{display:flex;flex:none;gap:var(--gap);min-width:100%;justify-content:space-around;align-items:center;animation:mq 40s linear infinite}
 .tick:hover>div{animation-play-state:paused}.tick b{font:700 .95rem var(--d);color:var(--c)}.tick span{color:var(--mut);font-size:.95rem}
 .tick span::after{content:"/";margin-inline-start:var(--gap);color:var(--line)}
@@ -34,15 +34,15 @@
 .gc{position:absolute;top:0;inset-inline-end:0;display:grid;place-items:center;width:2.75rem;height:2.75rem;border-end-start-radius:2.75rem;background:var(--c);color:#04140e;font-weight:700;transition:width .25s,height .25s}
 .plate:hover .gc,.plate:focus-visible .gc{width:3.6rem;height:3.6rem}[dir=rtl] .gc{transform:scaleX(-1)}
 .mo{position:absolute;pointer-events:none}
-.mo-gw{inset-inline-end:1.5rem;bottom:1.5rem;display:flex;align-items:flex-end;gap:4px;height:5.5rem}
-.mo-gw i{width:6px;height:100%;background:var(--c);border-radius:1px;transform-origin:bottom;animation:eq 1.3s ease-in-out infinite alternate}
+.mo-gw{inset-block-start:1.3rem;inset-inline-end:4.5rem;display:flex;align-items:flex-end;gap:3px;height:2.6rem}
+.mo-gw i{width:5px;height:100%;background:var(--c);border-radius:1px;transform-origin:bottom;animation:eq 1.3s ease-in-out infinite alternate}
 .mo-gw i:nth-child(2n){animation-duration:.9s}.mo-gw i:nth-child(3n){animation-delay:-.5s}.mo-gw i:nth-child(5n){animation-duration:1.7s;animation-delay:-.9s}.mo-gw i:nth-child(7n){animation-duration:.7s}
 @keyframes eq{from{transform:scaleY(.12)}to{transform:scaleY(1)}}
 .mo-v8{inset:0;z-index:-1;background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--c) 30%,transparent) 0,color-mix(in srgb,var(--c) 30%,transparent) 1px,transparent 0,transparent 50%) 0 0/10px 10px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 70%);mask-image:linear-gradient(to bottom,#000,transparent 70%)}
-.mo-rl{inset-inline-end:1.5rem;bottom:1.5rem;font:500 .85rem ui-monospace,Menlo,monospace;color:var(--c);direction:ltr}.mo-rl::before{content:"$ status --all_"}
-.mo-vx{inset-inline-end:-2.5rem;bottom:-2.5rem;width:11rem;height:11rem;border-radius:50%;background:repeating-conic-gradient(var(--c) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);opacity:.5;animation:spin 18s linear infinite}
+.mo-rl{top:1.25rem;inset-inline-start:3.8rem;font:500 .8rem ui-monospace,Menlo,monospace;color:var(--c);direction:ltr}.mo-rl::before{content:"$ status --all_"}
+.mo-vx{inset-inline-end:-4rem;bottom:-4rem;width:10rem;height:10rem;border-radius:50%;background:repeating-conic-gradient(var(--c) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);opacity:.38;animation:spin 18s linear infinite}
 @keyframes spin{to{transform:rotate(1turn)}}
 @media(min-width:640px){.plates{grid-template-columns:repeat(2,1fr)}.plate:first-child{grid-column:span 2}}
-@media(min-width:1000px){.plates{grid-template-columns:repeat(6,1fr)}.plate:first-child{grid-column:span 6}.plate:not(:first-child){grid-column:span 2}}
+@media(min-width:1000px){.plates{grid-template-columns:repeat(6,1fr)}.plate:first-child{grid-column:span 6}.plate:not(:first-child){grid-column:span 2}.mo-gw{height:3.6rem;gap:4px}.mo-gw i{width:6px}}
 .js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.1,1)}.js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}.sig path,.tick>div,.mo-gw i,.mo-vx,.chip i,.eye i,.hero h1,.hero .lead,.hero .btns{animation:none}}
