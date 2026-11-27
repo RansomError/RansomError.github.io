@@ -23,15 +23,20 @@
 <meta name="twitter:description" content="Explore Handy Labs: projects, web apps, Roblox game development, and Glasswave, a Liquid Glass music player.">
 <meta name="twitter:image" content="https://handylab.ru/favicon.png?v=3">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://handylab.ru/#organization","name":"Handy Labs","url":"https://handylab.ru/","logo":{"@type":"ImageObject","url":"https://handylab.ru/favicon.png?v=3","width":128,"height":128}},{"@type":"WebSite","@id":"https://handylab.ru/#website","url":"https://handylab.ru/","name":"Handy Labs","publisher":{"@id":"https://handylab.ru/#organization"}}]}</script>
-<script>try{var x=localStorage.getItem('handylabs-theme');if(x==='light'||x==='dark')document.documentElement.dataset.theme=x}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{var x=localStorage.getItem('handylabs-theme');if(x==='light'||x==='dark')document.documentElement.dataset.theme=x}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/shell.css">
+<link rel="stylesheet" href="/assets/css/home.css">
+<link rel="stylesheet" href="/assets/css/projects.css">
 </head>
 <body>
 <a class="skip" href="#main" data-t="skip">Skip to content</a>
 <header class="top">
-<a class="brand" href="/" data-go="overview"><img src="/favicon.png" alt="" width="32" height="32">Handy Labs</a>
+<a class="brand" href="/" data-go="overview" aria-label="Handy Labs"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 28 9 16 16 4 9z" fill="#c9fff1"/><path d="M4 9 16 16v14L4 23z" fill="#2fb98e"/><path d="M28 9v14L16 30V16z" fill="#5fe3b4"/></svg><span>Handy Labs</span></a>
+<button id="mb" type="button" aria-expanded="false" aria-controls="sheet"><i aria-hidden="true"></i><span class="m1" data-t="ui.menu">Menu</span><span class="m2" data-t="ui.close">Close</span></button>
+<div class="sheet" id="sheet">
 <nav id="nav" aria-label="Projects" data-al="ui.nav">
 <a href="/" data-p="overview" data-t="nav.overview">Overview</a>
 <a href="/?project=glasswave" data-p="glasswave">Glasswave</a>
@@ -43,25 +48,41 @@
 <select id="lang" aria-label="Language" data-al="ui.lang"></select>
 <select id="theme" aria-label="Theme" data-al="ui.theme"><option value="auto" data-t="ui.auto">System</option><option value="light" data-t="ui.light">Light</option><option value="dark" data-t="ui.dark">Dark</option></select>
 </div>
+</div>
 </header>
 <main id="main">
 <section id="overview" data-panel>
+<div class="hero">
+<svg class="sig" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80C100 10 200 150 300 80S500 10 600 80 800 150 900 80 1100 10 1200 80"/><path d="M0 90C120 30 230 140 340 90S560 40 680 90 880 140 1000 90 1120 50 1200 90"/></svg>
+<p class="eye"><i></i><span data-t="ov.k">Independent studio</span></p>
 <h1 data-t="ov.h">A home for things we build.</h1>
 <p class="lead" data-t="ov.p">Games, apps and experiments with their own character. One studio, one place to see what is in progress and what is coming next.</p>
 <div class="btns"><a class="btn p" href="/?project=glasswave" data-go="glasswave" data-t="ov.a">Open Glasswave</a><a class="btn" href="mailto:HandyLab@proton.me" data-t="ov.c">Contact Handy Labs</a></div>
-<ul class="idx">
-<li style="--c:#58d7ff"><a href="/?project=glasswave" data-go="glasswave"><b>Glasswave</b><span data-t="idx.glasswave">Music player with a local browser demo</span></a></li>
-<li style="--c:#ff6b80"><a href="/?project=v8v" data-go="v8v"><b>V8V Studio</b><span data-t="idx.v8v">Roblox horror, lobby systems and interfaces</span></a></li>
-<li style="--c:#e8b04a"><a href="/?project=releases" data-go="releases"><b data-t="nav.releases">Releases</b><span data-t="idx.releases">What can be downloaded today, and what cannot</span></a></li>
-<li style="--c:#a99bff"><a href="/?project=vortex" data-go="vortex"><b>Vortex</b><span data-t="idx.vortex">Vortex apps and experiments</span></a></li>
+<ul class="chips">
+<li class="chip" style="--c:#58d7ff"><i></i><b>Glasswave</b><span data-t="ov.s1">Browser demo available</span></li>
+<li class="chip" style="--c:#ff6b80"><i></i><b>V8V Studio</b><span data-t="ov.s2">In development</span></li>
+<li class="chip" style="--c:#e8b04a"><i></i><b data-t="nav.releases">Releases</b><span data-t="ov.s3">Real builds only</span></li>
 </ul>
+</div>
+<div class="tick" aria-hidden="true"><div>
+<b style="--c:#58d7ff">Glasswave</b><span data-t="idx.glasswave">Music player with a local browser demo</span>
+<b style="--c:#ff6b80">V8V Studio</b><span data-t="idx.v8v">Roblox horror, lobby systems and interfaces</span>
+<b style="--c:#e8b04a" data-t="nav.releases">Releases</b><span data-t="idx.releases">What can be downloaded today, and what cannot</span>
+<b style="--c:#a99bff">Vortex</b><span data-t="idx.vortex">Vortex apps and experiments</span>
+</div></div>
+<div class="plates">
+<a class="plate rv" href="/?project=glasswave" data-go="glasswave" style="--c:#58d7ff"><span class="mo mo-gw" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><small class="no">01</small><b>Glasswave</b><span data-t="idx.glasswave">Music player with a local browser demo</span><em class="st" data-t="ov.s1">Browser demo available</em><span class="gc" aria-hidden="true">→</span></a>
+<a class="plate rv" href="/?project=v8v" data-go="v8v" style="--c:#ff6b80"><span class="mo mo-v8" aria-hidden="true"></span><small class="no">02</small><b>V8V Studio</b><span data-t="idx.v8v">Roblox horror, lobby systems and interfaces</span><em class="st" data-t="ov.s2">In development</em><span class="gc" aria-hidden="true">→</span></a>
+<a class="plate rv" href="/?project=releases" data-go="releases" style="--c:#e8b04a"><span class="mo mo-rl" aria-hidden="true"></span><small class="no">03</small><b data-t="nav.releases">Releases</b><span data-t="idx.releases">What can be downloaded today, and what cannot</span><em class="st" data-t="ov.s3">Real builds only</em><span class="gc" aria-hidden="true">→</span></a>
+<a class="plate rv" href="/?project=vortex" data-go="vortex" style="--c:#a99bff"><span class="mo mo-vx" aria-hidden="true"></span><small class="no">04</small><b>Vortex</b><span data-t="idx.vortex">Vortex apps and experiments</span><em class="st" data-t="ov.s4">Apps and experiments</em><span class="gc" aria-hidden="true">→</span></a>
+</div>
 </section>
 <section id="glasswave" data-panel hidden>
 <h1 data-t="gw.h">Music, refracted.</h1>
 <p class="lead" data-t="gw.p">Glasswave is a music player for local libraries, playlists and artwork. Try the browser demo below: the files you choose stay on your device and are never uploaded.</p>
 <div class="pl">
 <h2 data-t="pl.h">Browser demo</h2>
-<canvas id="wv" width="480" height="64" aria-hidden="true"></canvas>
+<canvas id="wv" width="480" height="96" aria-hidden="true"></canvas>
 <div class="dz" id="dz"><span data-t="pl.drop">Choose audio files or drop them here</span><button class="btn p" id="pick" type="button" data-t="pl.pick">Choose files</button><input id="file" type="file" accept="audio/*,.mp3,.wav,.flac,.ogg,.m4a,.aac,.opus,.wma" multiple hidden></div>
 <div><span class="tm" id="cnt"></span><div id="tl"></div></div>
 <div><strong id="nt"></strong><br><span class="tm" id="na"></span></div>
@@ -77,16 +98,16 @@
 <h1 data-t="v8.h">Horror with intention.</h1>
 <p class="lead" data-t="v8.p">V8V Studio builds Roblox horror projects: atmosphere, lobby systems, interface design and experimental mechanics.</p>
 <ul class="list"><li data-t="v8.l1">Horror projects</li><li data-t="v8.l2">Game systems and lobbies</li><li data-t="v8.l3">Interfaces and effects</li></ul>
-<div class="btns"><a class="btn" href="mailto:HandyLab@proton.me" data-t="v8.c">Write about V8V</a></div>
+<div class="btns"><a class="btn p" href="mailto:HandyLab@proton.me" data-t="v8.c">Write about V8V</a></div>
 </section>
 <section id="releases" data-panel hidden>
 <h1 data-t="rl.h">Only real releases.</h1>
 <p class="lead" data-t="rl.p">A download appears here once a build has been tested. No placeholder installers.</p>
 <div class="tw"><table><thead><tr><th data-t="rl.c.0">Product</th><th data-t="rl.c.1">Platform</th><th data-t="rl.c.2">Status</th></tr></thead><tbody>
-<tr><td data-t="rl.r1.0">Glasswave</td><td data-t="rl.r1.1">Windows</td><td data-t="rl.r1.2">In testing. No public download yet.</td></tr>
-<tr><td data-t="rl.r2.0">Glasswave</td><td data-t="rl.r2.1">Web</td><td data-t="rl.r2.2">Local browser demo available</td></tr>
-<tr><td data-t="rl.r3.0">V8V Studio</td><td data-t="rl.r3.1">Roblox</td><td data-t="rl.r3.2">In development</td></tr>
-<tr><td data-t="rl.r4.0">Glasswave</td><td data-t="rl.r4.1">Android, macOS, Linux</td><td data-t="rl.r4.2">Planned, not released</td></tr>
+<tr data-s="test"><td data-t="rl.r1.0">Glasswave</td><td data-t="rl.r1.1">Windows</td><td data-t="rl.r1.2">In testing. No public download yet.</td></tr>
+<tr data-s="live"><td data-t="rl.r2.0">Glasswave</td><td data-t="rl.r2.1">Web</td><td data-t="rl.r2.2">Local browser demo available</td></tr>
+<tr data-s="dev"><td data-t="rl.r3.0">V8V Studio</td><td data-t="rl.r3.1">Roblox</td><td data-t="rl.r3.2">In development</td></tr>
+<tr data-s="plan"><td data-t="rl.r4.0">Glasswave</td><td data-t="rl.r4.1">Android, macOS, Linux</td><td data-t="rl.r4.2">Planned, not released</td></tr>
 </tbody></table></div>
 </section>
 <section id="vortex" data-panel hidden>
@@ -99,5 +120,6 @@
 <aside id="shop" lang="ru" hidden><a href="https://ozon.ru/s/pravoslavnyy-krestyanin" target="_blank" rel="noopener noreferrer" aria-label="Магазин «Православный крестьянин» на Ozon"><span><small>Рекомендация магазина</small><b>Православный крестьянин</b><span>Посмотрите товары в магазине на Ozon. ↗</span></span><img src="/pravoslavnyy-krestyanin-banner.jpg" alt="Витрина магазина «Православный крестьянин»" loading="lazy" width="80" height="108"></a></aside>
 <footer>Handy Labs · <a href="mailto:HandyLab@proton.me">HandyLab@proton.me</a></footer>
 <script src="/assets/js/app.js" defer></script>
+<script src="/assets/js/fx.js" defer></script>
 </body>
 </html>
