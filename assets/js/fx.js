@@ -3,7 +3,7 @@
 (()=>{try{
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],H=document.documentElement;
 const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const mb=$('#mb'),sh=$('#sheet'),set=o=>{o?sh.setAttribute('data-open',''):sh.removeAttribute('data-open');mb.setAttribute('aria-expanded',o);H.classList.toggle('mo',o)};
+const mb=$('#mb'),sh=$('#sheet'),set=o=>{o?sh.setAttribute('data-open',''):sh.removeAttribute('data-open');mb.setAttribute('aria-expanded',o);H.classList.toggle('nav-open',o)};
 mb.onclick=()=>set(!sh.hasAttribute('data-open'));
 sh.addEventListener('click',e=>{if(e.target.closest('#nav a'))set(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&sh.hasAttribute('data-open')){set(false);mb.focus()}});
