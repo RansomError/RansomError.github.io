@@ -1,5 +1,6 @@
 /* Project identities. Glasswave: glass-edged player; V8V: Animata-style diagonal lines + glitch; Releases: Eldora-style terminal window;
-   Vortex: spinning ring (concept from Aceternity's Vortex, own CSS). */
+   Vortex: spinning ring (concept from Aceternity's Vortex, own CSS; the angle is animated, not the box, so the page never widens). */
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
 [data-panel]:not([hidden]){animation:pin .5s cubic-bezier(.2,.7,.1,1)}@keyframes pin{from{opacity:0;transform:translateY(10px)}}
 #glasswave,#v8v,#releases,#vortex{position:relative;isolation:isolate}
 #glasswave h1{background:linear-gradient(100deg,var(--fg) 40%,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -19,6 +20,7 @@
 @keyframes ln{from{opacity:0;transform:translateX(-10px)}}
 #releases td:last-child::before{content:"";display:inline-block;width:.6rem;height:.6rem;margin-inline-end:.6rem;border-radius:50%;background:var(--led,#8aa39c)}
 tr[data-s=test]{--led:#e8b04a}tr[data-s=live]{--led:#4ade80}tr[data-s=dev]{--led:#ff6b80}
-#vortex::before{content:"";position:absolute;z-index:-1;inset-inline-end:calc(50% - 50vw);top:-3rem;width:min(24rem,85vw);height:min(24rem,85vw);border-radius:50%;background:repeating-conic-gradient(var(--acc) 0 4deg,transparent 4deg 14deg);-webkit-mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);opacity:.22;animation:spin 40s linear infinite}
+#vortex::before{content:"";position:absolute;z-index:-1;inset-inline-end:calc(50% - 50vw);top:-3rem;width:min(24rem,85vw);height:min(24rem,85vw);border-radius:50%;background:repeating-conic-gradient(from var(--a),var(--acc) 0 4deg,transparent 4deg 14deg);-webkit-mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);opacity:.22;animation:va 40s linear infinite}
+@keyframes va{to{--a:360deg}}
 #vxc,#vxe{max-width:36rem;padding:1.5rem;border:1px solid var(--line);border-radius:10px;background:var(--pan)}#vxe{border-style:dashed}
 @media(prefers-reduced-motion:reduce){#v8v h1,#vortex::before,#releases tbody tr,[data-panel]:not([hidden]){animation:none}}
