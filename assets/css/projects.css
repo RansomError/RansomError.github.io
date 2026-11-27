@@ -1,0 +1,24 @@
+/* Project identities. Glasswave: glass-edged player; V8V: Animata-style diagonal lines + glitch; Releases: Eldora-style terminal window;
+   Vortex: spinning ring (concept from Aceternity's Vortex, own CSS). */
+[data-panel]:not([hidden]){animation:pin .5s cubic-bezier(.2,.7,.1,1)}@keyframes pin{from{opacity:0;transform:translateY(10px)}}
+#glasswave,#v8v,#releases,#vortex{position:relative;isolation:isolate}
+#glasswave h1{background:linear-gradient(100deg,var(--fg) 40%,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+#glasswave .pl{padding:clamp(1rem,3vw,1.75rem);border-radius:14px;border-color:color-mix(in srgb,var(--acc) 35%,var(--line));background:linear-gradient(160deg,color-mix(in srgb,var(--acc) 10%,var(--pan)),var(--pan) 55%);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 25%,transparent),0 24px 60px -32px var(--acc)}
+#wv{height:96px}.pl h2{display:flex;align-items:center;gap:.6rem}.pl h2::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:var(--acc)}
+.dz{border-radius:10px}.ctr label{display:flex;align-items:center;gap:.75rem;flex:1;min-width:12rem}.ctr .btn[aria-pressed]{margin-inline-start:auto}
+#v8v::before{content:"";position:absolute;z-index:-1;inset:-5rem calc(50% - 50vw) auto;height:30rem;background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--acc) 24%,transparent) 0,color-mix(in srgb,var(--acc) 24%,transparent) 1px,transparent 0,transparent 50%) 0 0/10px 10px,radial-gradient(60% 80% at 20% 0,color-mix(in srgb,var(--acc) 22%,transparent),transparent 70%);-webkit-mask-image:linear-gradient(#000 35%,transparent);mask-image:linear-gradient(#000 35%,transparent)}
+#v8v h1{text-shadow:2px 0 color-mix(in srgb,var(--acc) 85%,transparent),-2px 0 color-mix(in srgb,#00e5ff 55%,transparent);animation:gl 7s steps(1) infinite}
+@keyframes gl{0%,91%,100%{transform:none}92%{transform:translate(-4px,1px) skewX(-5deg)}94%{transform:translate(4px,-1px)}96%{transform:translate(-2px,0)}}
+#v8v .list{counter-reset:i;list-style:none;padding:0;max-width:36rem;border-top:1px solid var(--line)}
+#v8v .list li{display:flex;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line);font:600 1.2rem var(--d)}
+#v8v .list li::before{counter-increment:i;content:counter(i,decimal-leading-zero);font:500 .85rem ui-monospace,Menlo,monospace;color:var(--acc)}
+#releases .tw{border:1px solid var(--line);border-radius:10px;background:var(--pan);overflow:hidden}
+#releases .tw::before{content:"● ● ●   handylab releases --status";display:block;direction:ltr;padding:.7rem 1rem;border-bottom:1px solid var(--line);font:500 .85rem ui-monospace,Menlo,monospace;letter-spacing:.03em;color:var(--mut)}
+#releases table{min-width:0}#releases td,#releases th{padding:.8rem .75rem;font-size:.95rem}
+#releases tbody tr{animation:ln .5s both}#releases tbody tr:nth-child(2){animation-delay:.12s}#releases tbody tr:nth-child(3){animation-delay:.24s}#releases tbody tr:nth-child(4){animation-delay:.36s}
+@keyframes ln{from{opacity:0;transform:translateX(-10px)}}
+#releases td:last-child::before{content:"";display:inline-block;width:.6rem;height:.6rem;margin-inline-end:.6rem;border-radius:50%;background:var(--led,var(--mut))}
+tr[data-s=test]{--led:#e8b04a}tr[data-s=live]{--led:light-dark(#15803d,#4ade80)}tr[data-s=dev]{--led:#ff6b80}
+#vortex::before{content:"";position:absolute;z-index:-1;inset-inline-end:calc(50% - 50vw - 7rem);top:-4rem;width:26rem;height:26rem;border-radius:50%;background:repeating-conic-gradient(var(--acc) 0 4deg,transparent 4deg 14deg);-webkit-mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);mask:radial-gradient(circle,transparent 28%,#000 29%,#000 62%,transparent 63%);opacity:.26;animation:spin 40s linear infinite}
+#vxc,#vxe{max-width:36rem;padding:1.5rem;border:1px solid var(--line);border-radius:10px;background:var(--pan)}#vxe{border-style:dashed}
+@media(prefers-reduced-motion:reduce){#v8v h1,#vortex::before,#releases tbody tr,[data-panel]:not([hidden]){animation:none}}
