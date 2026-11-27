@@ -6,7 +6,7 @@ body{overflow-x:clip}
 #mb i{display:block;width:1.1rem;height:2px;background:currentColor;box-shadow:0 -5px currentColor,0 5px currentColor}
 #mb[aria-expanded=true] i,#mb[aria-expanded=true] .m1,#mb:not([aria-expanded=true]) .m2{display:none}
 .sheet{position:fixed;inset:3.5rem 0 0;z-index:4;display:flex;flex-direction:column;gap:1.5rem;padding:1rem clamp(1rem,4vw,3rem) 2rem;background:var(--bg);overflow:auto;opacity:0;visibility:hidden;transform:translateY(-.5rem);transition:opacity .2s,transform .2s,visibility .2s}
-.sheet[data-open]{opacity:1;visibility:visible;transform:none}html.mo{overflow:hidden}
+.sheet[data-open]{opacity:1;visibility:visible;transform:none}html.nav-open{overflow:hidden}
 .sheet nav{display:grid;gap:0;overflow:visible;width:auto;order:0}
 .sheet nav a{display:flex;align-items:center;gap:.9rem;padding:1rem .25rem;border-radius:0;border-bottom:1px solid var(--line);box-shadow:none!important;color:var(--fg);font:600 1.5rem var(--d)}
 .sheet nav a::before{content:"";width:.7rem;height:.7rem;border-radius:2px;background:var(--c,var(--acc));flex:none}
