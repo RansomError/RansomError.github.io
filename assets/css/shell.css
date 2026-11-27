@@ -13,8 +13,9 @@ body{overflow-x:clip}
 .sheet nav a[aria-current]{color:var(--acc)}
 a[data-p=glasswave]{--c:#58d7ff}a[data-p=v8v]{--c:#ff6b80}a[data-p=releases]{--c:#e8b04a}a[data-p=vortex]{--c:#a99bff}
 .ctl{display:flex;flex-wrap:wrap;gap:.75rem}.ctl select{flex:1;min-width:8rem;min-height:2.75rem;font-size:1rem;max-width:none}
+footer{border-top:0;padding-top:1rem}footer::before{content:"";display:block;border-top:1px solid var(--line);margin-bottom:1.25rem}
 @media(min-width:900px){
-.top{backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 85%,transparent)}
+.top{padding-inline:max(clamp(1rem,4vw,3rem),calc(50% - 550px + 3rem));backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 85%,transparent)}
 #mb{display:none}
 .sheet{position:static;flex-direction:row;align-items:center;gap:1rem;padding:0;background:none;opacity:1;visibility:visible;transform:none;overflow:visible;margin-inline-start:auto}
 .sheet nav{display:flex;gap:.2rem}
