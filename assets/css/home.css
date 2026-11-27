@@ -42,7 +42,7 @@
 .mo-rl{top:1.25rem;inset-inline-start:3.8rem;font:500 .8rem ui-monospace,Menlo,monospace;color:var(--c);direction:ltr}.mo-rl::before{content:"$ status --all_"}
 .mo-vx{inset-inline-end:-4rem;bottom:-4rem;width:10rem;height:10rem;border-radius:50%;background:repeating-conic-gradient(var(--c) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);mask:radial-gradient(circle,transparent 34%,#000 35%,#000 70%,transparent 71%);opacity:.38;animation:spin 18s linear infinite}
 @keyframes spin{to{transform:rotate(1turn)}}
-@media(min-width:640px){.plates{grid-template-columns:repeat(2,1fr)}.plate:first-child{grid-column:span 2}}
+@media(min-width:640px){.plates{grid-template-columns:repeat(2,1fr)}.plate:first-child,.plate:last-child{grid-column:span 2}}
 @media(min-width:1000px){.plates{grid-template-columns:repeat(6,1fr)}.plate:first-child{grid-column:span 6}.plate:not(:first-child){grid-column:span 2}.mo-gw{height:3.6rem;gap:4px}.mo-gw i{width:6px}}
 .js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.1,1)}.js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}.sig path,.tick>div,.mo-gw i,.mo-vx,.chip i,.eye i,.hero h1,.hero .lead,.hero .btns{animation:none}}
