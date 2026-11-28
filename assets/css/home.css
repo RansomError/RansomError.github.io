@@ -1,4 +1,4 @@
-/* Home: hero (grid backdrop + signal line), status chips, ticker, project plates.
+/* Home: hero (grid backdrop + signal line), status chips, glass ticker, project plates.
    Technique credits (MIT): ticker = Magic UI Marquee (keyframes, --gap/--duration); plate border/spotlight = Magic UI Magic Card;
    V8V texture = Animata Diagonal Lines; corner = Uiverse "go-corner" card by Prince4fff (markup pattern, own CSS). */
 :root{--gl:color-mix(in srgb,var(--fg) 9%,transparent)}
@@ -17,22 +17,25 @@
 .chip{display:inline-flex;align-items:center;flex-wrap:wrap;gap:.2rem .55rem;padding:.45rem .9rem;border:1px solid var(--line);border-radius:1.25rem;background:color-mix(in srgb,var(--pan) 80%,transparent);font-size:.9rem;color:var(--mut)}
 .chip b{color:var(--fg);font-weight:600}.chip i{width:.55rem;height:.55rem;border-radius:50%;background:var(--c);color:var(--c);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 currentColor}70%,100%{box-shadow:0 0 0 .55rem transparent}}
-.tick{--gap:2.5rem;display:flex;gap:var(--gap);overflow:hidden;margin:0 calc(50% - 50vw);padding:.9rem 0;border-block:1px solid var(--line);white-space:nowrap}
+.tick{--gap:2.5rem;position:relative;isolation:isolate;display:flex;gap:var(--gap);overflow:hidden;margin:0 calc(50% - 50vw);padding:.9rem 0;border-block:1px solid var(--line);white-space:nowrap;background:color-mix(in srgb,var(--bg) 40%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.tick::before,.tick::after{content:"";position:absolute;top:0;bottom:0;width:22%;z-index:2;pointer-events:none;background:linear-gradient(to right,color-mix(in srgb,var(--bg) 85%,transparent),transparent);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);-webkit-mask-image:linear-gradient(to right,#000 35%,transparent);mask-image:linear-gradient(to right,#000 35%,transparent)}
+.tick::before{left:0}.tick::after{right:0;transform:scaleX(-1)}
 .tick>div{display:flex;flex:none;gap:var(--gap);min-width:100%;justify-content:space-around;align-items:center;animation:mq 40s linear infinite}
 .tick:hover>div{animation-play-state:paused}.tick b{font:700 .95rem var(--d);color:var(--c)}.tick span{color:var(--mut);font-size:.95rem}
 .tick span::after{content:"/";margin-inline-start:var(--gap);color:var(--line)}
 @keyframes mq{to{transform:translateX(calc(-100% - var(--gap)))}}
 [dir=rtl] .tick>div{animation-direction:reverse}
 .plates{display:grid;gap:1rem;margin-top:3rem}
-.plate{--mx:50%;--my:50%;position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;gap:.45rem;min-height:15rem;padding:1.5rem;border:1px solid transparent;border-radius:10px;overflow:hidden;text-decoration:none;background:linear-gradient(var(--pan),var(--pan)) padding-box,radial-gradient(220px circle at var(--mx) var(--my),var(--c),var(--line) 100%) border-box}
+.plate{--mx:50%;--my:50%;position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;gap:.45rem;min-height:15rem;padding:1.5rem;border:1px solid transparent;border-radius:10px;overflow:hidden;text-decoration:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;background:linear-gradient(var(--pan),var(--pan)) padding-box,radial-gradient(220px circle at var(--mx) var(--my),var(--c),var(--line) 100%) border-box}
 .plate::after{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(280px circle at var(--mx) var(--my),color-mix(in srgb,var(--c) 22%,transparent),transparent 70%)}
-.plate:hover::after,.plate:focus-visible::after{opacity:1}
+.plate:focus-visible::after{opacity:1}.plate:active{scale:.985}
 .plate b{font:700 clamp(1.5rem,4vw,2.3rem)/1.05 var(--d);letter-spacing:-.02em}.plate:first-child b{font-size:clamp(2rem,6.5vw,3.8rem)}
 .plate>span:not([class]){color:var(--mut);max-width:34ch}.plate:first-child{min-height:19rem}
 .no{position:absolute;top:1.25rem;inset-inline-start:1.5rem;font:500 .85rem ui-monospace,Menlo,monospace;color:var(--mut)}
 .st{display:inline-flex;align-items:center;gap:.5rem;margin-top:.4rem;font-style:normal;font-size:.9rem}.st::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--c)}
 .gc{position:absolute;top:0;inset-inline-end:0;display:grid;place-items:center;width:2.75rem;height:2.75rem;border-end-start-radius:2.75rem;background:var(--c);color:#04140e;font-weight:700;transition:width .25s,height .25s}
-.plate:hover .gc,.plate:focus-visible .gc{width:3.6rem;height:3.6rem}[dir=rtl] .gc{transform:scaleX(-1)}
+.plate:focus-visible .gc{width:3.6rem;height:3.6rem}[dir=rtl] .gc{transform:scaleX(-1)}
+@media(hover:hover){.plate:hover::after{opacity:1}.plate:hover .gc{width:3.6rem;height:3.6rem}}
 .mo{position:absolute;pointer-events:none}
 .mo-gw{inset-block-start:1.3rem;inset-inline-end:4.5rem;display:flex;align-items:flex-end;gap:3px;height:2.6rem}
 .mo-gw i{width:5px;height:100%;background:var(--c);border-radius:1px;transform-origin:bottom;animation:eq 1.3s ease-in-out infinite alternate}
