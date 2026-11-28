@@ -1,14 +1,8 @@
 /* Motion layer. Loaded by fx.js only when the visitor has not asked for reduced motion.
    Prefers transform, opacity and the individual translate/rotate/scale properties so animations stay on the compositor.
-   Concept credits are in CREDITS.md. */
+   Hover effects are limited to devices that can hover, so touch screens never get stuck highlights. Concept credits are in CREDITS.md. */
 @property --b{syntax:"<angle>";inherits:false;initial-value:0deg}
 ::selection{background:var(--acc);color:var(--ink)}
-@supports(animation-timeline:scroll()){
-body::before{content:"";position:fixed;inset:0 0 auto;height:3px;z-index:7;background:linear-gradient(90deg,var(--glow),var(--acc));transform:scaleX(0);transform-origin:0 50%;animation:prog linear both;animation-timeline:scroll(root)}
-[dir=rtl] body::before{transform-origin:100% 50%}
-@keyframes prog{to{transform:scaleX(1)}}
-.sig{animation:par linear both;animation-timeline:scroll(root);animation-range:0 70vh}
-@keyframes par{to{translate:0 50px}}}
 #glasswave>*,#v8v>*,#releases>*,#vortex>*{animation:rise .75s cubic-bezier(.2,.7,.1,1) both}
 #glasswave>:nth-child(2),#v8v>:nth-child(2),#releases>:nth-child(2),#vortex>:nth-child(2){animation-delay:.08s}
 #glasswave>:nth-child(3),#v8v>:nth-child(3),#releases>:nth-child(3),#vortex>:nth-child(3){animation-delay:.16s}
@@ -30,11 +24,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:3px;z-index:7;backg
 .hero .btn.p::after{animation:shim 6s 2.5s infinite}@keyframes shim{0%,70%,100%{translate:-130% 0}85%{translate:130% 0}}
 .rip{position:absolute;border-radius:50%;background:currentColor;opacity:.28;pointer-events:none;scale:0;animation:rip .65s ease-out forwards}@keyframes rip{to{scale:4;opacity:0}}
 @media(hover:hover){.btn:hover{translate:0 -2px;box-shadow:0 10px 24px -12px var(--acc)}.btn.p:hover::after{translate:130% 0}.brand:hover svg{scale:1.12}.chip:hover{scale:1.05;border-color:var(--c)}
-.plate:hover .mo-gw i{animation-duration:.55s}.plate:hover .mo-vx{animation-duration:5s}#v8v .list li:hover{translate:.5rem 0;color:var(--acc)}#v8v .list li:hover::before{letter-spacing:.2em}}
+.plate:hover{translate:0 -4px}.plate:hover .mo-gw i{animation-duration:.55s}.plate:hover .mo-vx{animation-duration:5s}#v8v .list li:hover{translate:.5rem 0;color:var(--acc)}#v8v .list li:hover::before{letter-spacing:.2em}}
 .chip{animation:bob 5s ease-in-out infinite;transition:scale .3s cubic-bezier(.34,1.56,.64,1),border-color .3s}.chip:nth-child(2){animation-delay:-1.6s}.chip:nth-child(3){animation-delay:-3.2s}@keyframes bob{50%{translate:0 -3px}}
-.tick{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .js .plate.rv{transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.1,1),translate .35s cubic-bezier(.2,.7,.1,1)}
-.plate:hover{translate:0 -4px}.mo-v8{animation:hatch 5s linear infinite}@keyframes hatch{to{background-position:10px 10px}}
+.mo-v8{animation:hatch 5s linear infinite}@keyframes hatch{to{background-position:10px 10px}}
 @media(hover:hover) and (pointer:fine){.js .plate.in{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out,opacity .6s,translate .35s}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(380px circle at var(--cx,50%) var(--cy,-30%),color-mix(in srgb,var(--glow) 13%,transparent),transparent 70%)}}
 .pl{position:relative}.pl::before{content:"";position:absolute;inset:-1px;border-radius:14px;padding:1px;background:conic-gradient(from var(--b),transparent 0 72%,var(--acc) 88%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:bspin 6s linear infinite;pointer-events:none}
