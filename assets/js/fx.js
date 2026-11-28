@@ -1,6 +1,7 @@
-/* Handy Labs 2.0 — interface effects: mobile menu, ticker repeat (Magic UI Marquee pattern), pointer spotlight and tilt on plates,
-   cursor glow, button ripple, playing state, headline decode, language/theme transitions, glass toast.
-   The motion stylesheet is loaded here, and only when the visitor has not asked for reduced motion. Content never depends on this file. */
+/* Handy Labs 2.0 — interface layer: mobile menu, custom language/theme pickers, ticker repeat (Magic UI Marquee pattern),
+   pointer spotlight and tilt on plates, cursor glow, button ripple, playing state, headline decode, language/theme transitions, glass toast.
+   The motion stylesheet is loaded here, and only when the visitor has not asked for reduced motion. Content never depends on this file;
+   the native <select> elements stay in the page as the source of truth and as the no-script fallback. */
 (()=>{try{
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],H=document.documentElement;
 const calm=matchMedia('(prefers-reduced-motion:reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -10,6 +11,32 @@ mb.onclick=()=>set(!sh.hasAttribute('data-open'));
 sh.addEventListener('click',e=>{if(e.target.closest('#nav a'))set(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&sh.hasAttribute('data-open')){set(false);mb.focus()}});
 matchMedia('(min-width:900px)').addEventListener('change',e=>{if(e.matches)set(false)});
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const dd=sel=>{
+const w=document.createElement('div'),b=document.createElement('button'),p=document.createElement('div'),l=document.createElement('ul');let inp=null;
+w.className='dd';b.type='button';b.className='dd-b';b.setAttribute('aria-haspopup','listbox');b.setAttribute('aria-expanded','false');p.className='dd-p';p.hidden=true;l.className='dd-l';l.setAttribute('role','listbox');
+const lab=()=>{const o=sel.selectedOptions[0],t=o?o.textContent:H.lang.toUpperCase(),a=sel.getAttribute('aria-label')||'';b.textContent=t;b.setAttribute('aria-label',a?a+': '+t:t)};
+const items=()=>[...l.children];
+const draw=f=>{l.replaceChildren();[...sel.options].filter(o=>!f||norm(o.textContent).includes(f)).forEach(o=>{const li=document.createElement('li');li.setAttribute('role','option');li.tabIndex=-1;li.dataset.v=o.value;li.textContent=o.textContent;if(o.value===sel.value)li.setAttribute('aria-selected','true');l.append(li)})};
+const close=back=>{if(p.hidden)return;p.hidden=true;b.setAttribute('aria-expanded','false');if(back)b.focus()};
+const open=()=>{draw('');if(sel.options.length>=8){if(!inp){inp=document.createElement('input');inp.type='search';inp.setAttribute('aria-label',sel.getAttribute('aria-label')||'');inp.placeholder=sel.getAttribute('aria-label')||'';inp.oninput=()=>draw(norm(inp.value));p.prepend(inp)}inp.value=''}
+p.hidden=false;b.setAttribute('aria-expanded','true');const r=b.getBoundingClientRect(),room=innerHeight-r.bottom;p.classList.toggle('up',room<300&&r.top>room);(fine&&inp||items().find(x=>x.getAttribute('aria-selected'))||items()[0]).focus()};
+const choose=v=>{sel.value=v;sel.dispatchEvent(new Event('change',{bubbles:true}));lab();close(true)};
+b.onclick=()=>p.hidden?open():close();
+b.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open()}});
+l.addEventListener('click',e=>{const li=e.target.closest('li');if(li)choose(li.dataset.v)});
+w.addEventListener('keydown',e=>{if(p.hidden)return;const it=items(),i=it.indexOf(document.activeElement),k=e.key;
+if(k==='Escape'){e.stopPropagation();close(true)}
+else if(k==='ArrowDown'){e.preventDefault();(it[i+1]||it[0])?.focus()}
+else if(k==='ArrowUp'){e.preventDefault();(it[i-1]||it[it.length-1])?.focus()}
+else if(k==='Home'&&i>=0){e.preventDefault();it[0].focus()}
+else if(k==='End'&&i>=0){e.preventDefault();it[it.length-1].focus()}
+else if((k==='Enter'||k===' ')&&i>=0){e.preventDefault();choose(it[i].dataset.v)}
+else if(k==='Tab')close()});
+document.addEventListener('pointerdown',e=>{if(!w.contains(e.target))close()});
+p.append(l);w.append(b,p);sel.before(w);sel.hidden=true;lab();
+new MutationObserver(lab).observe(sel,{childList:true,subtree:true,characterData:true});new MutationObserver(lab).observe(H,{attributes:true,attributeFilter:['lang','data-theme']})};
+['#lang','#theme'].forEach(s=>{try{const e=$(s);if(e)dd(e)}catch(x){}});
 const tk=$('.tick>div');if(tk)for(let i=0;i<3;i++)tk.parentNode.append(tk.cloneNode(true));
 $$('.plate').forEach(e=>{
 e.addEventListener('pointermove',v=>{const r=e.getBoundingClientRect(),x=v.clientX-r.left,y=v.clientY-r.top;e.style.setProperty('--mx',x+'px');e.style.setProperty('--my',y+'px');if(!calm&&fine){e.style.setProperty('--ry',((x/r.width-.5)*10).toFixed(2)+'deg');e.style.setProperty('--rx',((.5-y/r.height)*8).toFixed(2)+'deg')}});
